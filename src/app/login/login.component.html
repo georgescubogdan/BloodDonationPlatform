@@ -1,4 +1,4 @@
-<div class="background">
+<!-- <div class="background">
   <div class="row valign-wrapper" style="height: 90%;">
     <form class="col s10 m6 l4 offset-s1 offset-m3 offset-l4 center-align loginStyle" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
    
@@ -15,46 +15,40 @@
         </div>
       </div>
       <div class="row">      
-          <input type="submit" value="login" class="btn loginButton col s8 m6 l4 offset-s2 offset-m3 offset-l4">
+          <input type="button" (click)="submit()" value="login" class="btn loginButton col s8 m6 l4 offset-s2 offset-m3 offset-l4">
         </div>
     </form>
   </div>
 
-  <!-- //<button (click)="this._authService.doLogout()">logout</button> -->
-</div>
-<!-- 
-
-<div class="example-container">
-  <form class="example-container" [formGroup]="options">
-    <mat-checkbox formControlName="hideRequired">Hide required marker</mat-checkbox>
-    <div>
-      <label>Float label: </label>
-      <mat-radio-group formControlName="floatLabel">
-        <mat-radio-button value="auto">Auto</mat-radio-button>
-        <mat-radio-button value="always">Always</mat-radio-button>
-        <mat-radio-button value="never">Never</mat-radio-button>
-      </mat-radio-group>
-    </div>
-  </form>
-
-  <mat-form-field
-      [hideRequiredMarker]="options.value.hideRequired"
-      [floatLabel]="options.value.floatLabel">
-    <input matInput placeholder="Simple placeholder" required>
-  </mat-form-field>
-
-  <mat-form-field [floatLabel]="options.value.floatLabel">
-    <mat-label>Both a label and a placeholder</mat-label>
-    <input matInput placeholder="Simple placeholder">
-  </mat-form-field>
-
-  <mat-form-field
-      [hideRequiredMarker]="options.value.hideRequired"
-      [floatLabel]="options.value.floatLabel">
-    <mat-select required>
-      <mat-option>-- None --</mat-option>
-      <mat-option value="option">Option</mat-option>
-    </mat-select>
-    <mat-label><mat-icon>favorite</mat-icon> <b> Fancy</b> <i> label</i></mat-label>
-  </mat-form-field>
+ 
 </div> -->
+
+<div class="main-div">
+  <mat-card class="example-card z-depth center">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="example-form">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+              <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+          <td><mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+          </mat-form-field></td>
+        </tr></table>
+      </form>
+      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="submit()" color="primary">Login</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

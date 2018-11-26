@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthorizationService } from './authorization.service';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class AppComponent {
   title = 'mps02';
 
-  constructor(private authorization: AuthorizationService, private db: AngularFireDatabase) {
+  constructor(private authorization: AuthorizationService, private db: AngularFireDatabase, private authService : AuthService) {
 
   }
   editPost(post, newData) {
@@ -25,6 +26,10 @@ export class AppComponent {
       return this.db.list('posts/' + key).remove()
     }
     else console.log('action prevented!')
+  }
+
+  Logout() {
+    this.authService.signOut();
   }
 
 }

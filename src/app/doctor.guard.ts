@@ -21,7 +21,7 @@ export class DoctorGuard implements CanActivate {
       tap(authorized => {
         if (!authorized) {
           console.log('route prevented!')
-         //  this.router.navigate(['/']);
+          this.router.navigate(['/login']);
         }
       }))
   }

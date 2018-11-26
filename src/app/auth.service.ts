@@ -7,6 +7,7 @@ import { User } from './user'
 // import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService { 
@@ -14,7 +15,8 @@ export class AuthService {
   user: BehaviorSubject<User> = new BehaviorSubject(null)
 
   constructor(public afAuth: AngularFireAuth,
-              private db: AngularFireDatabase) {
+              private db: AngularFireDatabase,
+              private router: Router) {
 
 
       this.afAuth.authState.pipe(
@@ -45,6 +47,7 @@ export class AuthService {
 
     signOut() {
       this.afAuth.auth.signOut()
+      this.router.navigate(['/login']);
     }
 
     doLogin(email: string, password: string): Promise<any>{

@@ -21,7 +21,8 @@ export class UserGuard implements CanActivate {
       tap(authorized => {
         if (!authorized) {
           console.log('route prevented!')
-         //  this.router.navigate(['/']);
+          this.router.navigate(['/login']);
+          //  this.router.navigate(['/']);
         }
       }))
   }

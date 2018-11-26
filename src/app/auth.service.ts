@@ -89,9 +89,9 @@ export class AuthService {
     private updateUser(authData) {
       const userData = new User(authData)
       const ref = this.db.object('users/' + authData.uid)
-      ref.take(1)
+      ref.valueChanges()
          .subscribe(user => {
-          if (!user.role) {
+          if (!user['roles']) {
             ref.update(userData)
           }
       })

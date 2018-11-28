@@ -6,16 +6,21 @@
   <button mat-button>Despre Noi</button>
   <button mat-button>Contact</button>
 
-  <button mat-button [matMenuTriggerFor]="menu">
+  <button *ngIf="authorization.isUser || authorization.isDoctor || authorization.isNurse" mat-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-
-  <button *ngIf="authorization.isUser" [routerLink]="['/user/donations']" routerLinkActive="router-link-active"  mat-menu-item>Doneaza Acum</button>
-  <button *ngIf="authorization.isUser" mat-menu-item>Rezultatele Mele</button>
-  <button *ngIf="authorization.isUser" mat-menu-item>Donation Request</button>
-  <button *ngIf="authorization.isUser" mat-menu-item>Setari</button>
-  <button mat-menu-item>Setari</button>
+  <!-- <button *ngIf="authorization.isUser" [routerLink]="['/user/home']" routerLinkActive="router-link-active" mat-menu-item>Acasa</button> -->
+  <button *ngIf="authorization.isUser"   [routerLink]="['/user/donations']" routerLinkActive="router-link-active" mat-menu-item>Doneaza Acum</button>
+  <button *ngIf="authorization.isUser"   [routerLink]="['/user/results']" routerLinkActive="router-link-active" mat-menu-item>Rezultatele Mele</button>
+  <button *ngIf="authorization.isUser"   [routerLink]="['/user/settings']" routerLinkActive="router-link-active" mat-menu-item>Setari</button>
+  <!-- <button *ngIf="authorization.isDoctor" [routerLink]="['/doctor/home']" routerLinkActive="router-link-active" mat-menu-item>Acasa</button> -->
+  <button *ngIf="authorization.isDoctor" [routerLink]="['/doctor/request']" routerLinkActive="router-link-active" mat-menu-item>Cerere Noua</button>
+  <button *ngIf="authorization.isDoctor" [routerLink]="['/doctor/requests']" routerLinkActive="router-link-active" mat-menu-item>Cereri</button>
+  <button *ngIf="authorization.isDoctor" [routerLink]="['/doctor/settings']" routerLinkActive="router-link-active" mat-menu-item>Setari</button>
+  <!-- <button *ngIf="authorization.isNurse" [routerLink]="['/nurse/home']" routerLinkActive="router-link-active" mat-menu-item>Acasa</button> -->
+  <button *ngIf="authorization.isNurse" [routerLink]="['/nurse/donations']" routerLinkActive="router-link-active" mat-menu-item>Donatii</button>
+  <button *ngIf="authorization.isNurse" [routerLink]="['/nurse/requests']" routerLinkActive="router-link-active" mat-menu-item>Cereri</button>
   <button mat-menu-item (click)="Logout()">Logout</button>
 </mat-menu>
 </mat-toolbar>

@@ -20,9 +20,8 @@ export class NurseGuard implements CanActivate {
       map(user => _.has(_.get(user, 'roles'), 'nurse')),
       tap(authorized => {
         if (!authorized) {
-          console.log('route prevented!')
-          this.router.navigate(['/login']);
-          //  this.router.navigate(['/']);
+          this.auth.signOut();
+          //this.router.navigate(['/login']);
         }
       }))
   }

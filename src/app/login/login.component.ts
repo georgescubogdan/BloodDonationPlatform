@@ -19,12 +19,12 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private _authService: AuthService, private _router: Router, private db: AngularFireDatabase) { }
   
   ngOnInit() {
- 
+    
   }
   
   submit() {
     this.submitted = true;
-   
+    
     this._authService.doLogin(this.username, this.password).then(result => 
       {
         this._authService.afAuth.authState.pipe().subscribe(state => {
@@ -34,20 +34,17 @@ export class LoginComponent implements OnInit {
                 this.db.object('users/' + userData.uid + '/roles').valueChanges().subscribe(
                   roles => {
                     if (roles['doctor'] === true) {
-                      console.log('doctor ' + roles['doctor']);
-                      this._router.navigate(["/homedoctor"]);
+                      this._router.navigate(["/doctor/home"]);
                     } else if (roles['nurse'] === true) {
-                      console.log('nurse ' + roles['nurse']);
-                    this._router.navigate(["/homenurse"]); 
+                      this._router.navigate(["/nurse/home"]); 
                     } else {
-                      console.log('user ' + roles['user']);
-                      this._router.navigate(["/home"]);
+                      this._router.navigate(["/user/home"]);
                     }
                   }
                   )
                 }
               })
-                
+              
             }
           })
           

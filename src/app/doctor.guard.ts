@@ -20,8 +20,8 @@ export class DoctorGuard implements CanActivate {
       map(user => _.has(_.get(user, 'roles'), 'doctor')),
       tap(authorized => {
         if (!authorized) {
-          console.log('route prevented!')
-          this.router.navigate(['/login']);
+          this.auth.signOut();
+          //this.router.navigate(['/login']);
         }
       }))
   }

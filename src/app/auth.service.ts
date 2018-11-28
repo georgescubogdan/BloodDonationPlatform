@@ -46,7 +46,7 @@ export class AuthService {
     }
 
     signOut() {
-      this.afAuth.auth.signOut()
+      this.afAuth.auth.signOut();
       this.router.navigate(['/login']);
     }
 

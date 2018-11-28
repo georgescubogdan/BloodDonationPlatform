@@ -10,15 +10,26 @@ import { NurseGuard } from '../nurse.guard';
 import { UserGuard } from '../user.guard';
 import { RequestsComponent } from '../requests/requests.component';
 import { DonationsComponent } from '../donations/donations.component';
+import { FormComponent } from '../form/form.component';
+import { ResultsComponent } from '../results/results.component';
+import { UserSettingsComponent } from '../user-settings/user-settings.component';
+import { RequestComponent } from '../request/request.component';
+import { DoctorSettingsComponent } from '../doctor-settings/doctor-settings.component';
 
 const routes: Routes = [
   //{ path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'homedoctor', component: DoctorHomeComponent,  canActivate: [DoctorGuard] },
+  { path: 'doctor/home', component: DoctorHomeComponent,  canActivate: [DoctorGuard] },
+  { path: 'doctor/request', component: RequestComponent, canActivate: [DoctorGuard] },
   { path: 'doctor/requests', component: RequestsComponent, canActivate: [DoctorGuard] },
-  { path: 'homenurse', component: NurseHomeComponent,  canActivate: [NurseGuard] },
-  { path: 'home', component: UserHomeComponent,  canActivate: [UserGuard] },
-  { path: 'user/donations', component: DonationsComponent,  canActivate: [UserGuard] },
+  { path: 'doctor/settings', component: DoctorSettingsComponent, canActivate: [DoctorGuard] },
+  { path: 'nurse/home', component: NurseHomeComponent,  canActivate: [NurseGuard] },
+  { path: 'nurse/donations', component: DonationsComponent,  canActivate: [NurseGuard] },
+  { path: 'nurse/requests', component: NurseHomeComponent,  canActivate: [NurseGuard] },
+  { path: 'user/home', component: UserHomeComponent,  canActivate: [UserGuard] },
+  { path: 'user/donate', component: FormComponent,  canActivate: [UserGuard] },
+  { path: 'user/results', component: ResultsComponent,  canActivate: [UserGuard] },
+  { path: 'user/settings', component: UserSettingsComponent,  canActivate: [UserGuard] },
   { path: '**', redirectTo: 'login'}
   
 ];

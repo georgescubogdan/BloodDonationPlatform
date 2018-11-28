@@ -10,23 +10,27 @@ export class AuthorizationService {
   userRoles: Array<string>;
   /// the rule
  
-  get canRead(): boolean {
-    const allowed = ['admin', 'author', 'reader']
+  get isUser(): boolean {
+    const allowed = ['user']
     return this.matchingRole(allowed)
   }
 
-  get canEdit(): boolean {
-    const allowed = ['admin', 'author']
+  get isDoctor(): boolean {
+    const allowed = ['doctor']
     return this.matchingRole(allowed)
   }
 
-  get canDelete(): boolean {
-    const allowed = ['admin']
+  get isNurse(): boolean {
+    const allowed = ['nurse']
     return this.matchingRole(allowed)
   }
+
+
 
   /// Determine if any matching roles exist
   private matchingRole(allowedRoles): boolean {
+    console.log(this.userRoles)
+    console.log(!_.isEmpty(_.intersection(allowedRoles, this.userRoles)))
     return !_.isEmpty(_.intersection(allowedRoles, this.userRoles))
   }
   constructor(private auth: AuthService,

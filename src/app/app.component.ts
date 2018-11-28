@@ -14,20 +14,7 @@ export class AppComponent {
   constructor(private authorization: AuthorizationService, private db: AngularFireDatabase, private authService : AuthService) {
 
   }
-  editPost(post, newData) {
-    if ( this.authorization.canEdit ) {
-      return this.db.object('posts/' + post.$key).update(newData)
-    }
-    else console.log('action prevented!')
-  }
-
-  deletePost(key) {
-    if ( this.authorization.canDelete ) {
-      return this.db.list('posts/' + key).remove()
-    }
-    else console.log('action prevented!')
-  }
-
+  
   Logout() {
     this.authService.signOut();
   }

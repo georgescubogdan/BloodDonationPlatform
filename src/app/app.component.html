@@ -10,6 +10,11 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
+
+  <button *ngIf="authorization.isUser" [routerLink]="['/user/donations']" routerLinkActive="router-link-active"  mat-menu-item>Doneaza Acum</button>
+  <button *ngIf="authorization.isUser" mat-menu-item>Rezultatele Mele</button>
+  <button *ngIf="authorization.isUser" mat-menu-item>Donation Request</button>
+  <button *ngIf="authorization.isUser" mat-menu-item>Setari</button>
   <button mat-menu-item>Setari</button>
   <button mat-menu-item (click)="Logout()">Logout</button>
 </mat-menu>

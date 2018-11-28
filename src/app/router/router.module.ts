@@ -9,6 +9,7 @@ import { DoctorGuard } from '../doctor.guard';
 import { NurseGuard } from '../nurse.guard';
 import { UserGuard } from '../user.guard';
 import { RequestsComponent } from '../requests/requests.component';
+import { DonationsComponent } from '../donations/donations.component';
 
 const routes: Routes = [
   //{ path: '', component: LoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'doctor/requests', component: RequestsComponent, canActivate: [DoctorGuard] },
   { path: 'homenurse', component: NurseHomeComponent,  canActivate: [NurseGuard] },
   { path: 'home', component: UserHomeComponent,  canActivate: [UserGuard] },
+  { path: 'user/donations', component: DonationsComponent,  canActivate: [UserGuard] },
   { path: '**', redirectTo: 'login'}
   
 ];

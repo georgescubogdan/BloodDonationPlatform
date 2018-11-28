@@ -8,15 +8,17 @@ import { UserHomeComponent } from '../user-home/user-home.component';
 import { DoctorGuard } from '../doctor.guard';
 import { NurseGuard } from '../nurse.guard';
 import { UserGuard } from '../user.guard';
+import { RequestsComponent } from '../requests/requests.component';
 
 const routes: Routes = [
   //{ path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'homedoctor', component: DoctorHomeComponent,  canActivate: [DoctorGuard] },
+  { path: 'doctor/requests', component: RequestsComponent, canActivate: [DoctorGuard] },
   { path: 'homenurse', component: NurseHomeComponent,  canActivate: [NurseGuard] },
   { path: 'home', component: UserHomeComponent,  canActivate: [UserGuard] },
   { path: '**', redirectTo: 'login'}
- 
+  
 ];
 
 @NgModule({

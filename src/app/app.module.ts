@@ -16,13 +16,29 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { DoctorHomeComponent } from './doctor-home/doctor-home.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { NurseHomeComponent } from './nurse-home/nurse-home.component';
+import { FormComponent } from './form/form.component';
+import { ResultsComponent } from './results/results.component';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { RequestsComponent } from './requests/requests.component';
+import { RequestComponent } from './request/request.component';
+import { DoctorSettingsComponent } from './doctor-settings/doctor-settings.component';
+import { DonationsComponent } from './donations/donations.component';
+import { NurseRequestsComponent } from './nurse-requests/nurse-requests.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DoctorHomeComponent,
     UserHomeComponent,
-    NurseHomeComponent
+    NurseHomeComponent,
+    FormComponent,
+    ResultsComponent,
+    UserSettingsComponent,
+    RequestsComponent,
+    RequestComponent,
+    DoctorSettingsComponent,
+    DonationsComponent,
+    NurseRequestsComponent
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,7 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { RequestsComponent } from './requests/requests.component';
 import { RequestComponent } from './request/request.component';
 import { DoctorSettingsComponent } from './doctor-settings/doctor-settings.component';
-import { DonationsComponent } from './donations/donations.component';
+import { NurseDonationsComponent } from './donations/donations.component';
 import { NurseRequestsComponent } from './nurse-requests/nurse-requests.component';
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { NurseRequestsComponent } from './nurse-requests/nurse-requests.componen
     RequestsComponent,
     RequestComponent,
     DoctorSettingsComponent,
-    DonationsComponent,
+    NurseDonationsComponent,
     NurseRequestsComponent
   ],
   imports: [

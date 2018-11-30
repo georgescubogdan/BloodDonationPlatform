@@ -9,7 +9,7 @@ import { DoctorGuard } from '../doctor.guard';
 import { NurseGuard } from '../nurse.guard';
 import { UserGuard } from '../user.guard';
 import { RequestsComponent } from '../requests/requests.component';
-import { DonationsComponent } from '../donations/donations.component';
+import { NurseDonationsComponent } from '../donations/donations.component';
 import { FormComponent } from '../form/form.component';
 import { ResultsComponent } from '../results/results.component';
 import { UserSettingsComponent } from '../user-settings/user-settings.component';
@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'doctor/requests', component: RequestsComponent, canActivate: [DoctorGuard] },
   { path: 'doctor/settings', component: DoctorSettingsComponent, canActivate: [DoctorGuard] },
   { path: 'nurse/home', component: NurseHomeComponent,  canActivate: [NurseGuard] },
-  { path: 'nurse/donations', component: DonationsComponent,  canActivate: [NurseGuard] },
+  { path: 'nurse/donations', component: NurseDonationsComponent,  canActivate: [NurseGuard] },
   { path: 'nurse/requests', component: NurseRequestsComponent,  canActivate: [NurseGuard] },
   { path: 'user/home', component: UserHomeComponent,  canActivate: [UserGuard] },
   { path: 'user/donate', component: FormComponent,  canActivate: [UserGuard] },

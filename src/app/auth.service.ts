@@ -50,7 +50,7 @@ export class AuthService {
       this.router.navigate(['/login']);
     }
 
-    doLogin(email: string, password: string, role: string): Promise<any>{
+    doLogin(email: string, password: string, role: string = 'user'): Promise<any>{
       return new Promise<any>((resolve, reject) => {
         let provider = new firebase.auth.EmailAuthProvider();
         this.afAuth.auth

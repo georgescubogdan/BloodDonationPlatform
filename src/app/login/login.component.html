@@ -1,29 +1,4 @@
-<!-- <div class="background">
-  <div class="row valign-wrapper" style="height: 90%;">
-    <form class="col s10 m6 l4 offset-s1 offset-m3 offset-l4 center-align loginStyle" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-   
-      <div class="row">
-        <div class="input-field">
-          <input formControlName="username" id="first_name" type="text" class="validate loginCredentials">
-          <label for="first_name" style="text-align: center;">Email</label>
-        </div>
-      </div>
-      <div class="row">      
-        <div class="input-field">
-          <input formControlName="password" id="last_name" type="password" class="validate loginCredentials">
-          <label for="last_name" style="text-align: center;">Password</label>
-        </div>
-      </div>
-      <div class="row">      
-          <input type="button" (click)="submit()" value="login" class="btn loginButton col s8 m6 l4 offset-s2 offset-m3 offset-l4">
-        </div>
-    </form>
-  </div>
-
- 
-</div> -->
-
-<div class="main-div">
+<!-- <div class="main-div">
   <mat-card class="example-card z-depth center">
     <mat-card-header>
       <mat-card-title>Login</mat-card-title>
@@ -34,21 +9,47 @@
           <tr>
             <td>
               <mat-form-field class="example-full-width">
-              <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+                <input matInput placeholder="E-mail" [(ngModel)]="email" name="email" required>
               </mat-form-field>
             </td>
           </tr>
           <tr>
-          <td><mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
-          </mat-form-field></td>
-        </tr></table>
-      </form>
-      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button (click)="submit()" color="primary">Login</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+            <td><mat-form-field class="example-full-width">
+              <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+            </mat-form-field></td>
+          </tr></table>
+        </form>
+        <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button (click)="submit()" color="primary">Login</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+-->
 
+
+<div class="main-div">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">E-mail is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <!-- <button [disabled]="loading" class="btn btn-primary">Login</button> -->
+      <button  class="btn btn-primary">Login</button>
+      <!-- <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> -->
+      <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+    </div>
+  </form>
+</div>

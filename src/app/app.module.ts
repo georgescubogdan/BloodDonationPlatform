@@ -25,6 +25,7 @@ import { DoctorSettingsComponent } from './doctor-settings/doctor-settings.compo
 import { NurseDonationsComponent } from './donations/donations.component';
 import { NurseRequestsComponent } from './nurse-requests/nurse-requests.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { RegisterComponent } from './register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
     DoctorSettingsComponent,
     NurseDonationsComponent,
     NurseRequestsComponent,
-    HomeAdminComponent
+    HomeAdminComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

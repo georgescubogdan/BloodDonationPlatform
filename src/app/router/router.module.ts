@@ -15,6 +15,7 @@ import { ResultsComponent } from '../results/results.component';
 import { UserSettingsComponent } from '../user-settings/user-settings.component';
 import { RequestComponent } from '../request/request.component';
 import { DoctorSettingsComponent } from '../doctor-settings/doctor-settings.component';
+import { NurseRequestsComponent } from '../nurse-requests/nurse-requests.component';
 
 const routes: Routes = [
   //{ path: '', component: LoginComponent },
@@ -25,7 +26,7 @@ const routes: Routes = [
   { path: 'doctor/settings', component: DoctorSettingsComponent, canActivate: [DoctorGuard] },
   { path: 'nurse/home', component: NurseHomeComponent,  canActivate: [NurseGuard] },
   { path: 'nurse/donations', component: DonationsComponent,  canActivate: [NurseGuard] },
-  { path: 'nurse/requests', component: NurseHomeComponent,  canActivate: [NurseGuard] },
+  { path: 'nurse/requests', component: NurseRequestsComponent,  canActivate: [NurseGuard] },
   { path: 'user/home', component: UserHomeComponent,  canActivate: [UserGuard] },
   { path: 'user/donate', component: FormComponent,  canActivate: [UserGuard] },
   { path: 'user/results', component: ResultsComponent,  canActivate: [UserGuard] },

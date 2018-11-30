@@ -83,14 +83,15 @@ export class AuthService {
           console.log('intra')
           this.db.object('users/' + res.user.uid).snapshotChanges().subscribe(docSnapshot => {
             if (!docSnapshot.key) {
-              let roles_tmp = { user: false, doctor: false, nurse: false, approved: false }
+              let roles_tmp = { user: false, doctor: false, nurse: false}
               roles_tmp[value.role] = true;
               this.db.object('users/' + res.user.uid).set({
                 email: value.email,
                 photoURL: "",
                 firstName: value.firstName,
                 lastName: value.lastName,
-                roles: roles_tmp
+                roles: roles_tmp,
+                approved: false
               });
             }});
           resolve(res);

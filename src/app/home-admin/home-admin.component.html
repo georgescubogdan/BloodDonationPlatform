@@ -1,3 +1,6 @@
-<p>
-  home-admin works!
-</p>
+<mat-list>
+  <mat-list-item *ngFor="let user of users | async; let i = index">
+    {{ user | json}}
+    <button (click)="approveUser(i)">Approve</button>
+  </mat-list-item>
+</mat-list>

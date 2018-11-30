@@ -59,11 +59,11 @@ export class LoginComponent implements OnInit {
                   this.db.object('users/' + userData.uid + '/roles').valueChanges().subscribe(
                     roles => {
                       if (roles['doctor'] === true) {
-                        this._router.navigate(["/doctor/home"]);
+                        this._router.navigate(["/home"]);
                       } else if (roles['nurse'] === true) {
-                        this._router.navigate(["/nurse/home"]); 
+                        this._router.navigate(["/home"]); 
                       } else {
-                        this._router.navigate(["/user/home"]);
+                        this._router.navigate(["/home"]);
                       }
                     }
                     )

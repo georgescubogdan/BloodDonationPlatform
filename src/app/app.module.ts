@@ -26,6 +26,7 @@ import { NurseDonationsComponent } from './donations/donations.component';
 import { NurseRequestsComponent } from './nurse-requests/nurse-requests.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { RegisterComponent } from './register/register.component';
     NurseDonationsComponent,
     NurseRequestsComponent,
     HomeAdminComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

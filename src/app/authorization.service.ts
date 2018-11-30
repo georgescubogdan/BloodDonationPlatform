@@ -24,6 +24,11 @@ export class AuthorizationService {
     const allowed = 'nurse';
     return this.matchingRole(allowed);
   }
+  
+  get isAdmin(): boolean {
+    const allowed = 'admin';
+    return this.matchingRole(allowed);
+  }
 
 
 

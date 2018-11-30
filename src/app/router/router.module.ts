@@ -18,12 +18,15 @@ import { DoctorSettingsComponent } from '../doctor-settings/doctor-settings.comp
 import { NurseRequestsComponent } from '../nurse-requests/nurse-requests.component';
 import { RegisterComponent } from '../register/register.component';
 import { HomeAdminComponent } from '../home-admin/home-admin.component';
+import { HomeComponent } from '../home/home.component';
+import { AdminGuard } from '../admin.guard';
 
 const routes: Routes = [
   //{ path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'admin/home', component: HomeAdminComponent},
+  { path: 'home', component: HomeComponent },
+  { path: 'admin/users', component: HomeAdminComponent, canActivate: [AdminGuard]},
   { path: 'doctor/home', component: DoctorHomeComponent,  canActivate: [DoctorGuard] },
   { path: 'doctor/request', component: RequestComponent, canActivate: [DoctorGuard] },
   { path: 'doctor/requests', component: RequestsComponent, canActivate: [DoctorGuard] },

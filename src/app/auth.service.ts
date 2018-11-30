@@ -50,7 +50,7 @@ export class AuthService {
       this.router.navigate(['/login']);
     }
 
-    doLogin(email: string, password: string): Promise<any>{
+    doLogin(email: string, password: string, role: string): Promise<any>{
       return new Promise<any>((resolve, reject) => {
         let provider = new firebase.auth.EmailAuthProvider();
         this.afAuth.auth
@@ -58,10 +58,12 @@ export class AuthService {
         .then(res => {
           this.db.object('users/' + res.user.uid).snapshotChanges().subscribe(docSnapshot => {
             if (!docSnapshot.key) {
+              let roles_tmp = { user: false, doctor: false, nurse: false, approved: false }
+              roles_tmp[role] = true;
               this.db.object('users/' + res.user.uid).set({
                 email: email,
                 photoURL: "",
-                roles : { user: true, doctor: false, nurse: false }
+                roles: roles_tmp
               });
             }});
           resolve(res);

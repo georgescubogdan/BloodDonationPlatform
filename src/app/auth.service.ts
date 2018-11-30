@@ -56,16 +56,16 @@ export class AuthService {
         this.afAuth.auth
         .signInWithEmailAndPassword(email, password)
         .then(res => {
-          this.db.object('users/' + res.user.uid).snapshotChanges().subscribe(docSnapshot => {
-            if (!docSnapshot.key) {
-              let roles_tmp = { user: false, doctor: false, nurse: false, approved: false }
-              roles_tmp[role] = true;
-              this.db.object('users/' + res.user.uid).set({
-                email: email,
-                photoURL: "",
-                roles: roles_tmp
-              });
-            }});
+          // this.db.object('users/' + res.user.uid).snapshotChanges().subscribe(docSnapshot => {
+          //   if (!docSnapshot.key) {
+          //     let roles_tmp = { user: false, doctor: false, nurse: false, approved: false }
+          //     roles_tmp[role] = true;
+          //     this.db.object('users/' + res.user.uid).set({
+          //       email: email,
+          //       photoURL: "",
+          //       roles: roles_tmp
+          //     });
+          //   }});
           resolve(res);
         }, err => {
           reject(err);
@@ -73,13 +73,26 @@ export class AuthService {
       });
     }
   
-    doRegister(email: string, password: string): Promise<any>{
-      console.log(email);
+    doRegister(value): Promise<any>{
+      console.log(value.email);
       return new Promise<any>((resolve, reject) => {
         let provider = new firebase.auth.EmailAuthProvider();
         this.afAuth.auth
-        .createUserWithEmailAndPassword(email, password)
+        .createUserWithEmailAndPassword(value.email, value.password)
         .then(res => {
+          console.log('intra')
+          this.db.object('users/' + res.user.uid).snapshotChanges().subscribe(docSnapshot => {
+            if (!docSnapshot.key) {
+              let roles_tmp = { user: false, doctor: false, nurse: false, approved: false }
+              roles_tmp[value.role] = true;
+              this.db.object('users/' + res.user.uid).set({
+                email: value.email,
+                photoURL: "",
+                firstName: value.firstName,
+                lastName: value.lastName,
+                roles: roles_tmp
+              });
+            }});
           resolve(res);
         }, err => {
           reject(err);

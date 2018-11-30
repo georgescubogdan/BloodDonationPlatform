@@ -18,13 +18,15 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService) { }
-    
+    // roles : string[] = ['user', 'doctor', 'nurse'];
+    roles = [{'id': 'user', 'name':'User'}, {'id':'doctor', 'name': 'Doctor'}, {'id':'nurse', 'name': 'Nurse'}];
     ngOnInit() {
       this.registerForm = this.formBuilder.group({
         email: ['', [Validators.email, Validators.required]],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(6)]]
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        role: ['', Validators.required]
       });
     }
     
@@ -40,7 +42,7 @@ export class RegisterComponent implements OnInit {
       }
       
       this.loading = true;
-      this.auth.doRegister(this.registerForm.value.email, this.registerForm.value.password).then(e =>
+      this.auth.doRegister(this.registerForm.value).then(e =>
         {
           console.log('merge')
           // this.auth.doLogin(this.registerForm.value.email, this.registerForm.value.password)

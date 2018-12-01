@@ -10,39 +10,87 @@ import { map } from 'rxjs/operators';
 })
 export class HomeAdminComponent implements OnInit {
   users: Observable<any[]>;;
-  keys : any[] = [];
-  
+  centers: Observable<any[]>;;
+  userKeys : any[] = [];
+  centerKeys : any[] = [];
   constructor(private db: AngularFireDatabase) { 
     this.users = this.db.list('users/').valueChanges();
-    
+    this.centers = this.db.list('centers/').valueChanges();
   }
   
+  mockCenter1 = {
+    name: 'C1'
+  }
+  mockCenter2 = {
+    name: 'C2'
+  }
+  mockCenter3 = {
+    name: 'C3'
+  }
   
   ngOnInit() {
-    this.getKeys();
-    //this.approveUser('ba38MW2JIHfv4SFUZXWHnVFoZN62');
-    console.log(this.keys)
+    this.getUserKeys();
+    this.getCenterKeys();
+    //adds 3 centers for testing purposes
+    this.addCenter(this.mockCenter1)
+    this.addCenter(this.mockCenter2)
+    this.addCenter(this.mockCenter3)
+    console.log(this.centerKeys)
   }
-  getKeys() {
+  getUserKeys() {
     return this.db.list('users/')
     .snapshotChanges().subscribe(
       snapshot => {
         snapshot.forEach(e => {
-          if (!this.keys.includes(e.key)) {
-            this.keys.push(e.key);
+          if (!this.userKeys.includes(e.key)) {
+            this.userKeys.push(e.key);
           }
         });
       })
-    }
-    
-    approveUser(index) {
-      let userId = this.keys[index];
+  }
+   
+  getCenterKeys() {
+    return this.db.list('centers/')
+    .snapshotChanges().subscribe(
+      snapshot => {
+        snapshot.forEach(e => {
+          if (!this.centerKeys.includes(e.key)) {
+            this.centerKeys.push(e.key);
+          }
+        });
+      })
+  }
+  approveUser(index) {
+      let userId = this.userKeys[index];
       this.db.object('users/' + userId).snapshotChanges().subscribe(docSnapshot => {
         if (docSnapshot.key) {
           this.db.list('users/').update(userId, {
             approved: true
           });
         }});
-      }
+  }
+    deleteCenter(index) {
+      let centerId = this.centerKeys[index];
+      this.db.object('centers/' + centerId).snapshotChanges().subscribe(docSnapshot => {
+        if (docSnapshot.key) {
+          this.db.list('centers/').remove(centerId).then(
+            e => {
+          this.centerKeys = [];
+          this.getCenterKeys()
+          console.log(this.centerKeys);
+            }
+          )
+        }});
     }
-    
+
+    addCenter(data) {
+      this.db.list('centers/').push(data).then(
+        e => {
+          this.centerKeys = [];
+          this.getCenterKeys()
+          console.log(this.centerKeys);
+            }
+      )
+    }
+
+  }

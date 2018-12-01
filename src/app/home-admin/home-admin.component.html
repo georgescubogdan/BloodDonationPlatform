@@ -1,6 +1,13 @@
 <mat-list>
   <mat-list-item *ngFor="let user of users | async; let i = index">
     {{ user | json}}
-    <button (click)="approveUser(i)">Approve</button>
+    <button (click)="approveUser(i)">Autorizare</button>
   </mat-list-item>
 </mat-list>
+
+<mat-list>
+    <mat-list-item *ngFor="let center of centers | async; let i = index">
+      {{ center | json}}
+      <button (click)="deleteCenter(i)">Sterge</button>
+    </mat-list-item>
+  </mat-list>

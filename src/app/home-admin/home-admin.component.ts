@@ -11,13 +11,13 @@ import { map } from 'rxjs/operators';
 export class HomeAdminComponent implements OnInit {
   users: Observable<any[]>;;
   keys : any[] = [];
-  
-  constructor(private db: AngularFireDatabase) { 
+
+  constructor(private db: AngularFireDatabase) {
     this.users = this.db.list('users/').valueChanges();
-    
+
   }
-  
-  
+
+
   ngOnInit() {
     this.getKeys();
     //this.approveUser('ba38MW2JIHfv4SFUZXWHnVFoZN62');
@@ -34,7 +34,7 @@ export class HomeAdminComponent implements OnInit {
         });
       })
     }
-    
+
     approveUser(index) {
       let userId = this.keys[index];
       this.db.object('users/' + userId).snapshotChanges().subscribe(docSnapshot => {
@@ -45,4 +45,3 @@ export class HomeAdminComponent implements OnInit {
         }});
       }
     }
-    

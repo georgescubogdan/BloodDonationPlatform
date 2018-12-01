@@ -1,6 +1,39 @@
-<mat-list>
-  <mat-list-item *ngFor="let user of users | async; let i = index">
-    {{ user | json}}
-    <button (click)="approveUser(i)">Approve</button>
-  </mat-list-item>
-</mat-list>
+<ul>
+  <li *ngFor="let user of users | async; let i = index" class="row space-between approved-{{ user.approved }}">
+    <!-- {{ user| json}} -->
+    <div class="col">
+      <div class="row">
+        <div class="col photo">
+          <img *ngIf="user.photoURL === ''" src="../../assets/images/default-user.png" alt="user">
+          <img *ngElse src="user.photoURL" alt="user">
+        </div>
+        <div class="col">
+          <div>
+            <span>First Name: </span>
+            <span>{{ user.firstName }}</span>
+          </div>
+          <div>
+            <span>Last Name: </span>
+            <span>{{ user.lastName }}</span>
+          </div>
+          <div>
+            <span>E-mail: </span>
+            <span>{{ user.email }}</span>
+          </div>
+          <div>
+            <span>Role: </span>
+            <span *ngIf="user.roles.admin">admin </span>
+            <span *ngIf="user.roles.doctor">doctor </span>
+            <span *ngIf="user.roles.nurse">nurse </span>
+            <span *ngIf="user.roles.user">user </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <button *ngIf="!user.approved" class="btn btn-primary" (click)="approveUser(i)">Approve</button>
+    </div>
+
+  </li>
+</ul>

@@ -1,0 +1,60 @@
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 30px;
+}
+
+li {
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+li button {
+  background: none;
+  border: none;
+  background-color: rgba(83, 212, 83, 0.5);
+  color: green;
+  border: 1px solid green;
+  transition: 0.3s;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+li button:hover {
+  background-color: rgba(83, 212, 83, 1);
+}
+
+.approved-true {
+  background-color: #53d453;
+  color: green;
+  border: 1px solid green;
+}
+
+.approved-false {
+  background-color: #ffaa41;
+  color: #cc0000;
+  border: 1px solid #cc0000;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.col {
+  margin: 0 15px;
+}
+
+.photo {
+  width: 100px;
+  height: 100px;
+}
+
+.photo img {
+  max-width: 100%;
+}

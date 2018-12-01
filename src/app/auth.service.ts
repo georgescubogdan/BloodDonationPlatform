@@ -10,7 +10,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthService { 
+export class AuthService {
 
   user: BehaviorSubject<User> = new BehaviorSubject(null)
 
@@ -50,7 +50,7 @@ export class AuthService {
       this.router.navigate(['/login']);
     }
 
-    doLogin(email: string, password: string, role: string = 'user'): Promise<any>{
+    doLogin(email: string, password: string, loginComponent, role: string = 'user'): Promise<any>{
       return new Promise<any>((resolve, reject) => {
         let provider = new firebase.auth.EmailAuthProvider();
         this.afAuth.auth
@@ -68,11 +68,12 @@ export class AuthService {
           //   }});
           resolve(res);
         }, err => {
+          loginComponent.invalidUsernameOrPassword = true;
           reject(err);
         })
       });
     }
-  
+
     doRegister(value): Promise<any>{
       console.log(value.email);
       return new Promise<any>((resolve, reject) => {

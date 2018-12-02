@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home-admin',
@@ -13,7 +14,7 @@ export class HomeAdminComponent implements OnInit {
   centers: Observable<any[]>;;
   userKeys : any[] = [];
   centerKeys : any[] = [];
-  constructor(private db: AngularFireDatabase) { 
+  constructor(private formBuilder: FormBuilder, private db: AngularFireDatabase) { 
     this.users = this.db.list('users/').valueChanges();
     this.centers = this.db.list('centers/').valueChanges();
   }
@@ -30,8 +31,12 @@ export class HomeAdminComponent implements OnInit {
   
   keys : any[] = [];
 
-
+addCenterForm: FormGroup
   ngOnInit() {
+    this.addCenterForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      address: ['', Validators.required]
+    });
     this.getUserKeys();
     this.getCenterKeys();
     //adds 3 centers for testing purposes
@@ -94,6 +99,14 @@ export class HomeAdminComponent implements OnInit {
           console.log(this.centerKeys);
             }
       )
+    }
+
+    onSubmit() {
+      console.log('merge submit')
+      if (this.addCenterForm.valid)
+      {
+        this.addCenter(this.addCenterForm.value);
+      }
     }
 
   }

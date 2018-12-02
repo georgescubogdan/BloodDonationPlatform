@@ -33,10 +33,9 @@
     <div class="col">
       <button *ngIf="!user.approved" class="btn btn-primary" (click)="approveUser(i)">Approve</button>
     </div>
-
+    
   </li>
 </ul>
-
 
 <mat-list>
   <mat-list-item *ngFor="let center of centers | async; let i = index">
@@ -44,3 +43,19 @@
     <button (click)="deleteCenter(i)">Sterge</button>
   </mat-list-item>
 </mat-list>
+<div class="example-container">
+  
+  <form class="example-form" [formGroup]="addCenterForm">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Nume Centru" formControlName="name">
+    </mat-form-field>
+    
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Adresa Centru" formControlName="address">
+    </mat-form-field>
+    
+    <button (click)='onSubmit()' mat-raised-button>
+      Adauga
+    </button>
+  </form>
+</div>

@@ -7,7 +7,7 @@
   <br>
 
   <mat-card-content>    
-      <form>    
+      <form [formGroup]="donationForm">    
           <table>
 
               <tr>
@@ -18,7 +18,7 @@
               <tr>    
                   <td>   
                     <mat-form-field class="full-width">
-                      <input matInput placeholder="Varsta">
+                      <input formControlName="age" matInput placeholder="Varsta">
                     </mat-form-field>
                   </td>
               <!-- </tr>
@@ -26,7 +26,7 @@
               <tr>     -->
                   <td>
                     <mat-form-field class="full-width">
-                      <input matInput placeholder="Greutate">
+                      <input formControlName="weight" matInput placeholder="Greutate">
                     </mat-form-field>
                   </td>
               </tr>
@@ -34,7 +34,7 @@
               <tr>
                 <td colspan="2">
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="Gen">
+                        <mat-select formControlName="gender" placeholder="Gen">
                           <mat-option value="Feminin">Feminin</mat-option>
                           <mat-option value="Masculin">Masculin</mat-option>
                         </mat-select>
@@ -45,7 +45,7 @@
               <tr>
                 <td>
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="Grupa de sange">
+                        <mat-select formControlName="bloodType" placeholder="Grupa de sange">
                           <mat-option value="Nu stiu">Nu stiu</mat-option>
                           <mat-option value="O (I)">O (I)</mat-option>
                           <mat-option value="A (II)">A (II)</mat-option>
@@ -59,7 +59,7 @@
               <tr> -->
                 <td>
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="RH">
+                        <mat-select formControlName="rh" placeholder="RH">
                           <mat-option value="Nu stiu">Nu stiu</mat-option>
                           <mat-option value="RH +">RH +</mat-option>
                           <mat-option value="RH -">RH -</mat-option>
@@ -78,73 +78,73 @@
 
               <tr>
                 <td colspan="2">
-                    <mat-checkbox>TBC</mat-checkbox>
+                    <mat-checkbox (change)="toggleDisease('TBC')">TBC</mat-checkbox>
                 </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>Malarie</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('Malarie')">Malarie</mat-checkbox>
                   </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>Hepatita</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('Hepatita')">Hepatita</mat-checkbox>
                   </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>Sifilis</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('Sifilis')">Sifilis</mat-checkbox>
                   </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>SIDA</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('SIDA')">SIDA</mat-checkbox>
                   </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>Boli cardio-vasculare</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('Cardio')">Boli cardio-vasculare</mat-checkbox>
                   </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>Boli endocrine</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('Endo')">Boli endocrine</mat-checkbox>
                   </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>Boli autoimune</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('Autoimune')">Boli autoimune</mat-checkbox>
                   </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>Diabet zaharat</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('Diabet')">Diabet zaharat</mat-checkbox>
                   </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>Schizofrenie</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('Schizofrenie')">Schizofrenie</mat-checkbox>
                   </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>Epilepsie</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('Epilepsie')">Epilepsie</mat-checkbox>
                   </td>
               </tr>
 
               <tr>
                   <td colspan="2">
-                      <mat-checkbox>Cancer</mat-checkbox>
+                      <mat-checkbox (change)="toggleDisease('Cancer')">Cancer</mat-checkbox>
                   </td>
               </tr>
 
@@ -165,8 +165,8 @@
               <tr>
                   <td colspan="2">
                     <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu">Nu</mat-radio-button>    
+                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Tratament')">Da</mat-radio-button>  
+                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Tratament')">Nu</mat-radio-button>    
                     </mat-radio-group> 
                 </td>
               </tr>
@@ -182,8 +182,8 @@
               <tr>
                   <td colspan="2">
                     <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu">Nu</mat-radio-button>    
+                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Medicamente')">Da</mat-radio-button>  
+                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Medicamente')">Nu</mat-radio-button>    
                     </mat-radio-group> 
                 </td>
               </tr>
@@ -199,8 +199,8 @@
               <tr>
                   <td colspan="2">
                     <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu">Nu</mat-radio-button>    
+                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Alcool')">Da</mat-radio-button>  
+                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Alcool')">Nu</mat-radio-button>    
                     </mat-radio-group> 
                 </td>
               </tr>
@@ -216,9 +216,9 @@
               <tr>
                   <td colspan="2">
                     <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu">Nu</mat-radio-button>    
-                        <mat-radio-button class="margin" value="Nu am tatuaje">Nu am tatuaje</mat-radio-button>    
+                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Tatuaj')">Da</mat-radio-button>  
+                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Tatuaj')">Nu</mat-radio-button>    
+                        <mat-radio-button class="margin" value="Nu am tatuaje" (change)="removeRestriction('Tatuaj')">Nu am tatuaje</mat-radio-button>    
                     </mat-radio-group> 
                 </td>
               </tr>
@@ -234,8 +234,8 @@
               <tr>
                   <td colspan="2">
                     <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu">Nu</mat-radio-button>    
+                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Boala')">Da</mat-radio-button>  
+                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Boala')">Nu</mat-radio-button>    
                     </mat-radio-group> 
                 </td>
               </tr>
@@ -251,8 +251,8 @@
               <tr>
                   <td colspan="2">
                     <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu">Nu</mat-radio-button>    
+                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Donat')">Da</mat-radio-button>  
+                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Donat')">Nu</mat-radio-button>    
                     </mat-radio-group> 
                 </td>
               </tr>
@@ -268,8 +268,8 @@
               <tr>
                   <td colspan="2">
                     <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu">Nu</mat-radio-button>    
+                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Bebe')">Da</mat-radio-button>  
+                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Bebe')">Nu</mat-radio-button>    
                     </mat-radio-group> 
                 </td>
               </tr>

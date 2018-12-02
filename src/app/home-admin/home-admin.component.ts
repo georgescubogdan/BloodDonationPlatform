@@ -28,6 +28,9 @@ export class HomeAdminComponent implements OnInit {
     name: 'C3'
   }
   
+  keys : any[] = [];
+
+
   ngOnInit() {
     this.getUserKeys();
     this.getCenterKeys();

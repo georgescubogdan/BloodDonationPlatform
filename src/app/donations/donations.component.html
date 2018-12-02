@@ -1,3 +1,9 @@
-<p>
-  donations works!
-</p>
+<div *ngFor="let user of donations; let j = index">
+  <mat-list>
+    <mat-list-item *ngFor="let donation of user | async; let i = index">
+      {{ donation | json}}
+      <button (click)="analyze(j, i)">Analizeaza</button>
+
+    </mat-list-item>
+  </mat-list>
+</div>

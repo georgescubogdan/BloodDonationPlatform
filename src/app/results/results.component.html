@@ -1,3 +1,5 @@
-<p>
-  results works!
-</p>
+<mat-list>
+  <mat-list-item *ngFor="let result of results | async; let i = index">
+    {{ result | json}}
+  </mat-list-item>
+</mat-list>

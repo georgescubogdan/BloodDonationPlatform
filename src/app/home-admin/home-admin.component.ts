@@ -10,8 +10,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./home-admin.component.css']
 })
 export class HomeAdminComponent implements OnInit {
-  users: Observable<any[]>;;
-  centers: Observable<any[]>;;
+  users: Observable<any[]>;
+  centers: Observable<any[]>;
   userKeys : any[] = [];
   centerKeys : any[] = [];
   constructor(private formBuilder: FormBuilder, private db: AngularFireDatabase) { 

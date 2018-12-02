@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="!formCompleted">
 
   <mat-card-title>    
     Formular de inscriere pentru donarea de sange   
@@ -275,5 +275,20 @@
               </tr>
             </table>
           </form>    
-        </mat-card-content>    
+        </mat-card-content>  
+        <button mat-raised-button (click)="submit()">Trimite</button>  
 </mat-card>
+
+
+<div *ngIf="formCompleted && canDonate">
+    <p>
+        Felicitari, poti dona!
+    </p>
+    <button mat-raised-button (click)="donate()">Doneaza Acum!</button>
+</div>
+
+<div *ngIf="formCompleted && !canDonate">
+    <p>
+        Ne pare rau, nu poti dona!
+    </p>
+</div>

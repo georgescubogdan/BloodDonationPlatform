@@ -46,11 +46,9 @@
                 <td>
                     <mat-form-field class="full-width">
                         <mat-select formControlName="bloodType" placeholder="Grupa de sange">
-                          <mat-option value="Nu stiu">Nu stiu</mat-option>
-                          <mat-option value="O (I)">O (I)</mat-option>
-                          <mat-option value="A (II)">A (II)</mat-option>
-                          <mat-option value="B (III)">B (III)</mat-option>
-                          <mat-option value="AB (IV)">AB (IV)</mat-option>
+                            <mat-option *ngFor="let type of types" [value]="type">
+                                {{type}}
+                            </mat-option>
                         </mat-select>
                       </mat-form-field>
                 </td>
@@ -60,9 +58,9 @@
                 <td>
                     <mat-form-field class="full-width">
                         <mat-select formControlName="rh" placeholder="RH">
-                          <mat-option value="Nu stiu">Nu stiu</mat-option>
-                          <mat-option value="RH +">RH +</mat-option>
-                          <mat-option value="RH -">RH -</mat-option>
+                            <mat-option *ngFor="let rh of rhs" [value]="rh">
+                                {{rh}}
+                            </mat-option>
                         </mat-select>
                       </mat-form-field>
                 </td>

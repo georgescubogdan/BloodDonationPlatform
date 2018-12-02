@@ -10,7 +10,8 @@ import { NgForm, FormBuilder, Validators, FormGroup, FormsModule, ReactiveFormsM
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-
+  types = ['A', 'B', 'O', 'AB'];
+  rhs = ['+', '-'];
   canDonate = false;
   formCompleted = false;
   diseases: string[] = [];

@@ -1,3 +1,5 @@
-<p>
-  requests works!
-</p>
+<mat-list>
+  <mat-list-item *ngFor="let request of requests | async; let i = index">
+    {{ request | json}}
+  </mat-list-item>
+</mat-list>

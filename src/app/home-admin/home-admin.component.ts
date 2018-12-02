@@ -39,10 +39,10 @@ addCenterForm: FormGroup
     });
     this.getUserKeys();
     this.getCenterKeys();
-    //adds 3 centers for testing purposes
-    this.addCenter(this.mockCenter1)
-    this.addCenter(this.mockCenter2)
-    this.addCenter(this.mockCenter3)
+    // //adds 3 centers for testing purposes
+    // this.addCenter(this.mockCenter1)
+    // this.addCenter(this.mockCenter2)
+    // this.addCenter(this.mockCenter3)
     console.log(this.centerKeys)
   }
   getUserKeys() {
@@ -102,7 +102,6 @@ addCenterForm: FormGroup
     }
 
     onSubmit() {
-      console.log('merge submit')
       if (this.addCenterForm.valid)
       {
         this.addCenter(this.addCenterForm.value);

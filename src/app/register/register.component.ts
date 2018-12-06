@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
-  
+  additionalData: any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -24,6 +24,8 @@ export class RegisterComponent implements OnInit {
       this.registerForm = this.formBuilder.group({
         email: ['', [Validators.email, Validators.required]],
         firstName: ['', Validators.required],
+        address: ['', Validators.required],
+        coordinates: [''],
         lastName: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(6)]],
         role: ['', Validators.required]
@@ -42,7 +44,7 @@ export class RegisterComponent implements OnInit {
       }
       
       this.loading = true;
-      this.auth.doRegister(this.registerForm.value).then(e =>
+      this.auth.doRegister(this.registerForm.value, this.additionalData).then(e =>
         {
           console.log('merge')
           // this.auth.doLogin(this.registerForm.value.email, this.registerForm.value.password)
@@ -50,6 +52,15 @@ export class RegisterComponent implements OnInit {
         }
         );
         
+      }
+
+      onAutocompleteSelected(event) {
+        //console.log(event);
+      }
+
+      onLocationSelected(coordinates) {
+        console.log(coordinates);
+        this.additionalData = coordinates;
       }
       
     }

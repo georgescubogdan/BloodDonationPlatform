@@ -27,6 +27,8 @@ import { NurseRequestsComponent } from './nurse-requests/nurse-requests.componen
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import {AgmCoreModule} from '@agm/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,12 @@ import { HomeComponent } from './home/home.component';
     RouterModuleWrapper,
     FormsModule,
     ReactiveFormsModule,
+    MatGoogleMapsAutocompleteModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAyfjHiYM9wOoWxCHaTVv5nabpxoAqaLhM',
+      libraries: ['geometry', 'places'],
+      language: 'en',
+  }) 
     
   ],
   providers: [

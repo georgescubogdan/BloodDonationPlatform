@@ -21,6 +21,18 @@
         <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
       </select>
     </div>
+    <div *ngIf="registerForm.value.role=='user'" class="form-group">
+       <label for="address">Address</label>
+      <input class="form-control"
+       matGoogleMapsAutocomplete
+       [country]="ro" formControlName="address"
+       (onAutocompleteSelected)="onAutocompleteSelected($event)"
+       (onLocationSelected)="onLocationSelected($event)">
+    <!-- <input type="text" formControlName="address" class="form-control" /> -->
+      <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+        <div *ngIf="f.address.errors.required">Address is required</div>
+      </div>
+    </div>
     <div class="form-group">
       <label for="email">E-mail</label>
       <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />

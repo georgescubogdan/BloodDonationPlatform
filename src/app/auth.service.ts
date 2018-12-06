@@ -74,7 +74,7 @@ export class AuthService {
       });
     }
 
-    doRegister(value): Promise<any>{
+    doRegister(value, additionalData): Promise<any>{
       console.log(value.email);
       return new Promise<any>((resolve, reject) => {
         let provider = new firebase.auth.EmailAuthProvider();
@@ -92,6 +92,7 @@ export class AuthService {
                 firstName: value.firstName,
                 lastName: value.lastName,
                 roles: roles_tmp,
+                coordinates: additionalData,
                 approved: false
               });
             }});

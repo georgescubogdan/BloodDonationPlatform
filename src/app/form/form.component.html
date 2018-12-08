@@ -146,12 +146,6 @@
                   </td>
               </tr>
 
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox>Niciuna dintre cele mentionate</mat-checkbox>
-                  </td>
-              </tr>
-
               <br>
 
               <tr>
@@ -214,8 +208,8 @@
               <tr>
                   <td colspan="2">
                     <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Tatuaj')">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Tatuaj')">Nu</mat-radio-button>    
+                        <mat-radio-button class="margin" value="Da" (change)="removeRestriction('Tatuaj')">Da</mat-radio-button>  
+                        <mat-radio-button class="margin" value="Nu" (change)="addRestriction('Tatuaj')">Nu</mat-radio-button>    
                         <mat-radio-button class="margin" value="Nu am tatuaje" (change)="removeRestriction('Tatuaj')">Nu am tatuaje</mat-radio-button>    
                     </mat-radio-group> 
                 </td>
@@ -249,8 +243,8 @@
               <tr>
                   <td colspan="2">
                     <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Donat')">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Donat')">Nu</mat-radio-button>    
+                        <mat-radio-button class="margin" value="Da" (change)="removeRestriction('Donat')">Da</mat-radio-button>  
+                        <mat-radio-button class="margin" value="Nu" (change)="addRestriction('Donat')">Nu</mat-radio-button>    
                     </mat-radio-group> 
                 </td>
               </tr>

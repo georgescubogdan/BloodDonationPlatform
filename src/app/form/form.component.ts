@@ -69,7 +69,7 @@ export class FormComponent implements OnInit {
     let data = {
       date: date,
       pending: true
-      //other stuff 
+      //TODO other stuff 
     }
     this.db.list('donations/' + uid + '/').push(data);
     this.router.navigate(['/user/results']);

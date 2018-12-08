@@ -38,19 +38,19 @@ export class NurseDonationsComponent implements OnInit {
           }
         });
       })
-    }
-    getDonationKeys(key) {
-      this.donationKeys = [];
-      return this.db.list('donations/' + key + '/')
-      .snapshotChanges().subscribe(
-        snapshot => {
-          snapshot.forEach(e => {
-            if (!this.donationKeys.includes(e.key)) {
-              this.donationKeys.push(e.key);
-            }
-          });
-        })
-      }
+  }
+  getDonationKeys(key) {
+    this.donationKeys = [];
+    return this.db.list('donations/' + key + '/')
+    .snapshotChanges().subscribe(
+      snapshot => {
+        snapshot.forEach(e => {
+          if (!this.donationKeys.includes(e.key)) {
+            this.donationKeys.push(e.key);
+          }
+        });
+      })
+  }
   async analyze(j, i) {
     console.log(j)
     console.log(i)
@@ -68,6 +68,5 @@ export class NurseDonationsComponent implements OnInit {
         });
       }});
   }
-
-  }
+}
   

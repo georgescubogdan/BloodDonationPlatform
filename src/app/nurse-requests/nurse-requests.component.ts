@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { map, take } from 'rxjs/operators';
+import { map, filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nurse-requests',
@@ -11,17 +11,70 @@ import { map, take } from 'rxjs/operators';
 export class NurseRequestsComponent implements OnInit {
   requests: Observable<any[]>;
   stocks: Observable<any[]>;
+  users: Observable<any[]>;
+  filteredUsers: Observable<any[]>;
+
+  userKeys: any[] = [];
   requestKeys: any[] = [];
   stockKeys: any[] = [];
   req;
   public qty: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
   constructor(private db: AngularFireDatabase) { 
     this.requests = this.db.list('requests/').valueChanges();
     this.stocks = this.db.list('stock/').valueChanges();
+    this.users = this.db.list('users/').valueChanges();
+    
+    this.filteredUsers = this.users.pipe(
+      (map(us => us.filter(
+        user => user.approved === true && 
+        user.roles.user === true &&
+        user.hasOwnProperty('coordinates')
+        )))
+    );
+  }
+  
+  distanceBetweenTwoPoints(lat1, lon1, lat2, lon2, unit="K") {
+    if ((lat1 == lat2) && (lon1 == lon2)) {
+      return 0;
+    }
+    else {
+      var radlat1 = Math.PI * lat1/180;
+      var radlat2 = Math.PI * lat2/180;
+      var theta = lon1-lon2;
+      var radtheta = Math.PI * theta/180;
+      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      if (dist > 1) {
+        dist = 1;
+      }
+      dist = Math.acos(dist);
+      dist = dist * 180/Math.PI;
+      dist = dist * 60 * 1.1515;
+      if (unit=="K") { dist = dist * 1.609344 }
+      if (unit=="N") { dist = dist * 0.8684 }
+      return dist;
+    }
+  }
+
+  getDistance(user) {
+    // blood center
+    let lat_ref = 45;
+    let lon_ref = 25;
+
+    let lat = user.coordinates.latitude;
+    let lon = user.coordinates.longitude;
+    return this.distanceBetweenTwoPoints(lat_ref, lon_ref, lat, lon);
+  }
+
+  getUsersByRole(role: String) {
+    return this.users
+      .pipe(map(us => us.filter(user => user.roles.role === true)));
   }
 
   ngOnInit() {
     this.getRequestKeys();
+    this.getStockKeys();
+    this.getUserKeys();
    // console.log(this.getRequestsData());
   }
 
@@ -44,6 +97,18 @@ export class NurseRequestsComponent implements OnInit {
         snapshot.forEach(e => {
           if (!this.stockKeys.includes(e.key)) {
             this.stockKeys.push(e.key);
+          }
+        });
+      })
+  }
+
+  getUserKeys() {
+    return this.db.list('users/')
+    .snapshotChanges().subscribe(
+      snapshot => {
+        snapshot.forEach(e => {
+          if (!this.userKeys.includes(e.key)) {
+            this.userKeys.push(e.key);
           }
         });
       })
@@ -107,6 +172,4 @@ export class NurseRequestsComponent implements OnInit {
         
       }});
   }
-
-
 }

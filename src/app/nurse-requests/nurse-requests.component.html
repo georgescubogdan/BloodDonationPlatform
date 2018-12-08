@@ -16,3 +16,12 @@
     {{ stock | json}}
   </mat-list-item>
 </mat-list>
+
+<mat-list>
+  <mat-list-item *ngFor="let u of filteredUsers | async; let i = index">
+    User:
+    {{ u.firstName | json }}
+    , Dist(Km):
+    {{ getDistance(u) }}
+  </mat-list-item>
+</mat-list>

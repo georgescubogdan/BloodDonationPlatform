@@ -3,6 +3,10 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
+import {MatInputModule} from '@angular/material';
 
 @Component({
   selector: 'app-home-admin',
@@ -14,6 +18,8 @@ export class HomeAdminComponent implements OnInit {
   centers: Observable<any[]>;
   userKeys : any[] = [];
   centerKeys : any[] = [];
+  additionalData: any;
+
   constructor(private formBuilder: FormBuilder, private db: AngularFireDatabase) { 
     this.users = this.db.list('users/').valueChanges();
     this.centers = this.db.list('centers/').valueChanges();
@@ -35,7 +41,7 @@ addCenterForm: FormGroup
   ngOnInit() {
     this.addCenterForm = this.formBuilder.group({
       name: ['', Validators.required],
-      address: ['', Validators.required]
+      coordinates: ['']
     });
     this.getUserKeys();
     this.getCenterKeys();
@@ -43,7 +49,12 @@ addCenterForm: FormGroup
     // this.addCenter(this.mockCenter1)
     // this.addCenter(this.mockCenter2)
     // this.addCenter(this.mockCenter3)
-    console.log(this.centerKeys)
+    // console.log(this.centerKeys)
+    // console.log(this.centers);
+  }
+  onLocationSelected(coordinates) {
+    console.log(coordinates);
+    this.additionalData = coordinates;
   }
   getUserKeys() {
     return this.db.list('users/')
@@ -104,7 +115,11 @@ addCenterForm: FormGroup
     onSubmit() {
       if (this.addCenterForm.valid)
       {
-        this.addCenter(this.addCenterForm.value);
+        let newCenter = this.addCenterForm.value;
+        newCenter.coordinates = this.additionalData;
+        
+        this.addCenter(newCenter);
+        
       }
     }
 

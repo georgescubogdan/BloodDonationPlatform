@@ -13,7 +13,9 @@ export class NurseRequestsComponent implements OnInit {
   stocks: Observable<any[]>;
   users: Observable<any[]>;
   filteredUsers: Observable<any[]>;
+  centers: Observable<any[]>;
 
+  centersList: any[] = [];
   userKeys: any[] = [];
   requestKeys: any[] = [];
   stockKeys: any[] = [];
@@ -24,7 +26,8 @@ export class NurseRequestsComponent implements OnInit {
     this.requests = this.db.list('requests/').valueChanges();
     this.stocks = this.db.list('stock/').valueChanges();
     this.users = this.db.list('users/').valueChanges();
-    
+    this.centers = this.db.list('centers/').valueChanges();
+
     this.filteredUsers = this.users.pipe(
       (map(us => us.filter(
         user => user.approved === true && 
@@ -35,6 +38,8 @@ export class NurseRequestsComponent implements OnInit {
   }
   
   distanceBetweenTwoPoints(lat1, lon1, lat2, lon2, unit="K") {
+    
+
     if ((lat1 == lat2) && (lon1 == lon2)) {
       return 0;
     }
@@ -57,13 +62,25 @@ export class NurseRequestsComponent implements OnInit {
   }
 
   getDistance(user) {
+    
     // blood center
     let lat_ref = 45;
     let lon_ref = 25;
 
     let lat = user.coordinates.latitude;
     let lon = user.coordinates.longitude;
-    return this.distanceBetweenTwoPoints(lat_ref, lon_ref, lat, lon);
+    console.log(lat, lon);
+
+    let result = []
+
+    return this.centersList.
+        filter(
+          center => center.hasOwnProperty('coordinates')).
+        map(
+          center => this.distanceBetweenTwoPoints(lat, lon, center.coordinates.latitude, center.coordinates.longitude)
+        ); // subscribe(val => result = val);
+    // return this.distanceBetweenTwoPoints(lat_ref, lon_ref, lat, lon);
+    // return result;
   }
 
   getUsersByRole(role: String) {
@@ -75,6 +92,8 @@ export class NurseRequestsComponent implements OnInit {
     this.getRequestKeys();
     this.getStockKeys();
     this.getUserKeys();
+    this.getCenters();
+    console.log(this.centersList);
    // console.log(this.getRequestsData());
   }
 
@@ -98,6 +117,20 @@ export class NurseRequestsComponent implements OnInit {
           if (!this.stockKeys.includes(e.key)) {
             this.stockKeys.push(e.key);
           }
+        });
+      })
+  }
+
+  getCenters() {
+    
+
+    return this.db.list('centers/')
+    .snapshotChanges().subscribe(
+      snapshot => {
+        snapshot.forEach(e => {
+          
+            this.centersList.push(e);
+          
         });
       })
   }

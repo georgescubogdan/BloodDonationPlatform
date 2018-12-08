@@ -93,7 +93,9 @@ export class AuthService {
                 lastName: value.lastName,
                 roles: roles_tmp,
                 coordinates: additionalData,
-                approved: false
+                approved: false,
+                group: value.group,
+                rh: value.rh
               });
             }});
           resolve(res);

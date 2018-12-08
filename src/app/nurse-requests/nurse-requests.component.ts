@@ -38,8 +38,6 @@ export class NurseRequestsComponent implements OnInit {
   }
   
   distanceBetweenTwoPoints(lat1, lon1, lat2, lon2, unit="K") {
-    
-
     if ((lat1 == lat2) && (lon1 == lon2)) {
       return 0;
     }
@@ -62,25 +60,21 @@ export class NurseRequestsComponent implements OnInit {
   }
 
   getDistance(user) {
-    
     // blood center
     let lat_ref = 45;
     let lon_ref = 25;
 
     let lat = user.coordinates.latitude;
     let lon = user.coordinates.longitude;
-    console.log(lat, lon);
+    // console.log(lat, lon);
 
-    let result = []
-
-    return this.centersList.
-        filter(
-          center => center.hasOwnProperty('coordinates')).
-        map(
-          center => this.distanceBetweenTwoPoints(lat, lon, center.coordinates.latitude, center.coordinates.longitude)
-        ); // subscribe(val => result = val);
-    // return this.distanceBetweenTwoPoints(lat_ref, lon_ref, lat, lon);
-    // return result;
+    // return this.centersList.
+    //     filter(
+    //       center => center.hasOwnProperty('coordinates')).
+    //     map(
+    //       center => this.distanceBetweenTwoPoints(lat, lon, center.coordinates.latitude, center.coordinates.longitude)
+    //     );
+    return this.distanceBetweenTwoPoints(lat_ref, lon_ref, lat, lon);
   }
 
   getUsersByRole(role: String) {
@@ -122,14 +116,12 @@ export class NurseRequestsComponent implements OnInit {
   }
 
   getCenters() {
-    
-
     return this.db.list('centers/')
     .snapshotChanges().subscribe(
       snapshot => {
         snapshot.forEach(e => {
           
-            this.centersList.push(e);
+            this.centersList.push(e.key);
           
         });
       })

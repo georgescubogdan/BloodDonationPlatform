@@ -119,8 +119,30 @@ addCenterForm: FormGroup
         newCenter.coordinates = this.additionalData;
         
         this.addCenter(newCenter);
-        
       }
     }
 
+    deleteDonation(idDonation) {
+      this.db.object('donations/' + idDonation).snapshotChanges().subscribe(docSnapshot => {
+        if (docSnapshot.key) {
+          this.db.list('donations/').remove(idDonation).then(
+            e => {
+          this.centerKeys = [];
+          this.getCenterKeys()
+          console.log(this.centerKeys);
+            }
+          )
+        }});
+    }
+    
+    clearDonations() {
+      return this.db.list('users/')
+      .snapshotChanges().subscribe(
+        snapshot => {
+          snapshot.forEach(e => {
+            this.deleteDonation(e.key);
+          });
+        })
+    }
+    
   }

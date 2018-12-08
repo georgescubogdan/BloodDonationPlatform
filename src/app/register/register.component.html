@@ -16,6 +16,18 @@
       </div>
     </div>
     <div class="form-group">
+      <label for="email">Grupa de sange</label>
+      <select class="form-control" id="group" formControlName="group">
+        <option *ngFor="let group of groups" [value]="group.id">{{group.name}}</option>
+      </select>
+    </div>
+    <div class="form-rh">
+      <label for="email">Rh</label>
+      <select class="form-control" id="rh" formControlName="rh">
+        <option *ngFor="let rh of rhs" [value]="rh.id">{{rh.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="email">Rol</label>
       <select class="form-control" id="role" formControlName="role">
         <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>

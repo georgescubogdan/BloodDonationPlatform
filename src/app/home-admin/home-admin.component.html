@@ -1,3 +1,5 @@
+<button (click)="clearDonations()">Sterge donatii</button>
+
 <ul>
   <li *ngFor="let user of users | async; let i = index" class="row space-between approved-{{ user.approved }}">
     <!-- {{ user| json}} -->

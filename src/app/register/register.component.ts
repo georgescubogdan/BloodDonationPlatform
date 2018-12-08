@@ -20,6 +20,9 @@ export class RegisterComponent implements OnInit {
     private auth: AuthService) { }
     // roles : string[] = ['user', 'doctor', 'nurse'];
     roles = [{'id': 'user', 'name':'User'}, {'id':'doctor', 'name': 'Doctor'}, {'id':'nurse', 'name': 'Nurse'}];
+    groups = [{'id': 'A', 'name':'A'}, {'id':'B', 'name': 'B'}, {'id':'O', 'name': 'O'}, {'id':'AB', 'name': 'AB'}];
+    rhs = [{'id': '+', 'name':'+'}, {'id':'-', 'name': '-'}];
+
     ngOnInit() {
       this.registerForm = this.formBuilder.group({
         email: ['', [Validators.email, Validators.required]],
@@ -28,7 +31,9 @@ export class RegisterComponent implements OnInit {
         coordinates: [''],
         lastName: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        role: ['', Validators.required]
+        role: ['', Validators.required],
+        group: ['', Validators.required],
+        rh: ['', Validators.required]
       });
     }
     

@@ -37,11 +37,39 @@
   </li>
 </ul>
 
-<mat-list>
-  <mat-list-item *ngFor="let u of filteredUsers | async; let i = index">
-    User:
-    {{ u.email }} {{u.firstName}} {{u.lastName}} {{ u.group | json }} {{ u.rh | json }}
-    , Dist (Km) pana la centru:
-    {{ getDistance(u) | json }}
-  </mat-list-item>
-</mat-list>
+<ul>
+  <li *ngFor="let u of filteredUsers | async; let i = index" style="color:#3f51b5">
+    <div class="row space-between">
+      <div class="badge">
+        {{ u.group }}{{ u.rh }}
+      </div>
+      <div class="col">
+        <div class="row" style="border:none; margin: 15px 0">
+          <div class="col photo">
+            <img *ngIf="u.photoURL === ''" src="../../assets/images/default-user.png" alt="user">
+            <img *ngElse src="user.photoURL" alt="user">
+          </div>
+          <div class="col">
+            <div>
+              <span>First Name: </span>
+              <span>{{ u.firstName }}</span>
+            </div>
+            <div>
+              <span>Last Name: </span>
+              <span>{{ u.lastName }}</span>
+            </div>
+            <div>
+              <span>E-mail: </span>
+              <span>{{ u.email }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <span>Distance to the donating center: </span>
+        <span style="font-weight:bold">{{ getDistance(u).toFixed(2) }} km</span>
+        <!-- <button *ngIf="!user.approved" class="btn btn-primary" (click)="approveUser(i)">Approve</button> -->
+      </div>
+    </div>
+  </li>
+</ul>

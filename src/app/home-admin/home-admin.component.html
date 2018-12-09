@@ -3,7 +3,6 @@
 
 <ul>
   <li *ngFor="let user of users | async; let i = index" class="row space-between approved-{{ user.approved }}">
-    <!-- {{ user| json}} -->
     <div class="col">
       <div class="row">
         <div class="col photo">
@@ -36,7 +35,7 @@
     <div class="col">
       <button *ngIf="!user.approved" class="btn btn-primary" (click)="approveUser(i)">Approve</button>
     </div>
-    
+
   </li>
 </ul>
 
@@ -47,12 +46,12 @@
   </mat-list-item>
 </mat-list>
 <div class="example-container">
-  
+
   <form class="example-form" [formGroup]="addCenterForm">
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Nume Centru" formControlName="name">
     </mat-form-field>
-    
+
     <div class="form-group">
       <div class="example-full-width">
         <label for="address">Address</label>

@@ -79,7 +79,7 @@ h3 {
 
 .priority-indicator .level {
   width: calc((100% / 3) - 3px);
-  background-color: #e0e0e0;
+  background-color: #f0f0f0;
 }
 
 .priority-indicator .level:first-child {

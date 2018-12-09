@@ -38,20 +38,6 @@
   </li>
 </ul>
 
-<mat-list>
-  <mat-list-item *ngFor="let stock of stocks | async; let i = index">
-    {{ stock | json}}
-  </mat-list-item>
-</mat-list>
-
-<mat-list>
-  <mat-list-item *ngFor="let u of filteredUsers | async; let i = index">
-    User:
-    {{ u.email }} {{u.firstName}} {{u.lastName}} {{ u.group | json }} {{ u.rh | json }}
-    , Dist (Km) pana la centru:
-    {{ getDistance(u) | json }}
-  </mat-list-item>
-</mat-list>
 
 
 <mat-list>

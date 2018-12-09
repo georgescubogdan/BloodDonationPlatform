@@ -20,13 +20,15 @@
           {{ request.quantity }}
         </div>
       </div>
-      <button (click)="completeRequest(i)">
-        Complete request
-      </button>
-      <input placeholder="quantity" [(ngModel)]="qty[i]">
-      <button (click)="sendBlood(i)">
-        Send Blood
-      </button>
+      <div class="flex-center">
+        <button (click)="completeRequest(i)">
+          Complete request
+        </button>
+        <input placeholder="quantity" [(ngModel)]="qty[i]">
+        <button (click)="sendBlood(i)">
+          Send Blood
+        </button>
+      </div>
     </div>
   </li>
 </ul>
@@ -40,7 +42,7 @@
 <mat-list>
   <mat-list-item *ngFor="let u of filteredUsers | async; let i = index">
     User:
-    {{ u.email }} {{u.firstName}} {{u.lastName}} {{ u.group | json }} {{ u.rh | json }}   
+    {{ u.email }} {{u.firstName}} {{u.lastName}} {{ u.group | json }} {{ u.rh | json }}
     , Dist (Km) pana la centru:
     {{ getDistance(u) | json }}
   </mat-list-item>

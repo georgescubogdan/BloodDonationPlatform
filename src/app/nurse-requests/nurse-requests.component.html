@@ -20,7 +20,7 @@
 <mat-list>
   <mat-list-item *ngFor="let u of filteredUsers | async; let i = index">
     User:
-    {{ u.coordinates | json }}
+    {{ u.email }} {{u.firstName}} {{u.lastName}} {{ u.group | json }} {{ u.rh | json }}   
     , Dist (Km) pana la centru:
     {{ getDistance(u) | json }}
   </mat-list-item>

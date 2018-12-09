@@ -30,6 +30,7 @@ export class NurseRequestsComponent implements OnInit {
     this.users = this.db.list('users/').valueChanges();
     this.centers = this.db.list('centers/').valueChanges();
 
+    // TODO filtreaza dupa grupa
     this.filteredUsers = this.users.pipe(
       (map(us => us.filter(
         user => user.approved === true && 
@@ -69,6 +70,8 @@ export class NurseRequestsComponent implements OnInit {
     let lat = user.coordinates.latitude;
     let lon = user.coordinates.longitude;
     // console.log(lat, lon);
+
+    // TODO: distanta pana la centre
 
     // return this.centersList.
     //     filter(

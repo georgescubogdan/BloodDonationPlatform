@@ -70,16 +70,17 @@ export class FormComponent implements OnInit {
 
     let myData = {};
 
-    // this.db.object('users/' + uid).valueChanges().subscribe(user => myData = user);
-
     let stockSnapshot = this.db.object('users/' + uid).snapshotChanges().pipe(take(1));
     stockSnapshot.subscribe(docSnapshot => {
       if (docSnapshot['key']) {
         let o = docSnapshot.payload.val();
-        console.log(o);
+        // console.log(o);
         myData = o;
       }});
     await wait(100);
+
+    console.log(myData);
+
     let data = {
       date: date,
       pending: true,
@@ -87,14 +88,6 @@ export class FormComponent implements OnInit {
       lastName: myData['lastName'],
       group: myData['group'],
       rh: myData['rh'],
-      //TODO other stuff 
-      // date: date,
-      // pending: true,
-      // bloodType: myData['bloodType'],
-      // rh: myData['rh'],
-      // email: myData['email'],
-      // firstName: myData['firstName'],
-      // lastName: myData['lastName']
     }
     this.db.list('donations/' + uid + '/').push(data);
     this.router.navigate(['/user/results']);

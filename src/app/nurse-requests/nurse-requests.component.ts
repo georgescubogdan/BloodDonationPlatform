@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { map, filter, take } from 'rxjs/operators';
+import { MatYearView } from '@angular/material';
+const wait = (ms) => new Promise(res => setTimeout(res, ms));
 
 @Component({
   selector: 'app-nurse-requests',
@@ -150,51 +152,114 @@ export class NurseRequestsComponent implements OnInit {
       }});
   }
 
-  completeRequest(index) {
+  async completeRequest(index) {
     let reqId = this.requestKeys[index];
     let snapshot = this.db.object('requests/' + reqId).snapshotChanges().pipe(take(1));
+    let key = "";
+    let qNeeded = 0;
+
+    // get key and qNeeded
     snapshot.subscribe(docSnapshot => {
       if (docSnapshot.key && !docSnapshot.payload.val()['finalized']) {
         console.log(docSnapshot.payload.val())
-        let key = docSnapshot.payload.val()['bloodType'] + docSnapshot.payload.val()['rh']
-        this.updateStock(key, -docSnapshot.payload.val()['quantity']);
-        this.db.object('requests/' + reqId).update({
-          finalized: true,
-          recvQuantity: docSnapshot.payload.val()['quantity']
-        });
+        key = docSnapshot.payload.val()['bloodType'] + docSnapshot.payload.val()['rh']
+        qNeeded = docSnapshot.payload.val()['quantity'] - docSnapshot.payload.val()['recvQuantity'];
       }});
-  }
+  
+    // verifica stocul
+    let myData = {}
+    let stockSnapshot = this.db.object('stock/' + key).snapshotChanges().pipe(take(1));
+    stockSnapshot.subscribe(docSnapshot => {
+      if (docSnapshot['key']) {
+        let o = docSnapshot['payload'].val();
+        console.log(o['quantity']);
+        myData = o;
+      }});
 
-  sendBlood(index) {
-    let quantity = this.qty[index];
-    let reqId = this.requestKeys[index];
-    let snapshot = this.db.object('requests/' + reqId).snapshotChanges().pipe(take(1));
+    await wait(100);
+    console.log(key);
+    console.log(qNeeded);
+    console.log(myData);
+
+    // stockSnapshot = this.db.object('stock/' + key).snapshotChanges().pipe(take(1));
+    // stockSnapshot.subscribe(docSnapshot => {
+    //   if (docSnapshot['key']) {
+    //     console.log(docSnapshot['payload'].val())
+    //     this.db.object('stock/' + key).update({
+    //       quantity: docSnapshot['payload'].val()['quantity'] + quantity,
+    //     });
+    //   }});
     snapshot.subscribe(docSnapshot => {
-      if (docSnapshot.key && !docSnapshot.payload.val()['finalized'] && quantity !== 0) {
-        console.log(docSnapshot.payload.val())
-        let key = docSnapshot.payload.val()['bloodType'] + docSnapshot.payload.val()['rh']
-       
-        let q: number = Number(docSnapshot.payload.val()['recvQuantity']) + Number(quantity);
-        if (q === Number(docSnapshot.payload.val()['quantity'])) {
-          this.updateStock(key, -Number(quantity));
-          this.db.object('requests/' + reqId).update({
-            finalized: true,
-            recvQuantity: q
-          });
-        } else if (q > Number(docSnapshot.payload.val()['quantity'])){
-          this.updateStock(key, Number(docSnapshot.payload.val()['recvQuantity']) - Number(docSnapshot.payload.val()['quantity']));
+      if (docSnapshot.key && !docSnapshot.payload.val()['finalized']) {
+        console.log('verif ' + myData[key]['quantity'] + ' > ' + qNeeded);
+
+        if (Number(myData[key]['quantity']) >= qNeeded){
+          this.updateStock(key, -qNeeded);
           this.db.object('requests/' + reqId).update({
             finalized: true,
             recvQuantity: docSnapshot.payload.val()['quantity']
           });
-        } else {
-          this.db.object('requests/' + reqId).update({
-            recvQuantity: q
-          });
-          this.updateStock(key, -Number(quantity));
+        }
+      }});
+  }
+
+  async sendBlood(index) {
+    console.log(this.qty);
+    let quantity = this.qty[index];
+    let reqId = this.requestKeys[index];
+    let snapshot = this.db.object('requests/' + reqId).snapshotChanges().pipe(take(1));
+    let key = "";
+    
+    // get key 
+    snapshot.subscribe(docSnapshot => {
+      if (docSnapshot.key && !docSnapshot.payload.val()['finalized']) {
+        console.log(docSnapshot.payload.val())
+        key = docSnapshot.payload.val()['bloodType'] + docSnapshot.payload.val()['rh'];
+      }});
+  
+    // verifica stocul
+    let myData = {}
+    let stockSnapshot = this.db.object('stock/' + key).snapshotChanges().pipe(take(1));
+    stockSnapshot.subscribe(docSnapshot => {
+      if (docSnapshot['key']) {
+        let o = docSnapshot['payload'].val();
+        console.log(o['quantity']);
+        myData = o;
+      }});
+
+    await wait(100);
+    // console.log(key);
+    // console.log(qNeeded);
+    // console.log(myData);
+
+    snapshot.subscribe(docSnapshot => {
+      if (docSnapshot.key && !docSnapshot.payload.val()['finalized'] && quantity !== 0) {
+        console.log(docSnapshot.payload.val())
+        // let key = docSnapshot.payload.val()['bloodType'] + docSnapshot.payload.val()['rh']
+
+        console.log('verif ' + myData[key]['quantity'] + ' >= ' + quantity);
+        if (Number(myData[key]['quantity']) >= quantity){
+          let q: number = Number(docSnapshot.payload.val()['recvQuantity']) + Number(quantity);
+          if (q === Number(docSnapshot.payload.val()['quantity'])) {
+            this.updateStock(key, -Number(quantity));
+            this.db.object('requests/' + reqId).update({
+              finalized: true,
+              recvQuantity: q
+            });
+          } else if (q > Number(docSnapshot.payload.val()['quantity'])){
+            this.updateStock(key, Number(docSnapshot.payload.val()['recvQuantity']) - Number(docSnapshot.payload.val()['quantity']));
+            this.db.object('requests/' + reqId).update({
+              finalized: true,
+              recvQuantity: docSnapshot.payload.val()['quantity']
+            });
+          } else {
+            this.db.object('requests/' + reqId).update({
+              recvQuantity: q
+            });
+            this.updateStock(key, -Number(quantity));
+          }
         }
         this.qty[index] = 0;
-        
       }});
   }
 }

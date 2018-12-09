@@ -1,4 +1,5 @@
 <button (click)="clearDonations()">Sterge donatii</button>
+<button (click)="clearRequests()">Sterge cereri</button>
 
 <ul>
   <li *ngFor="let user of users | async; let i = index" class="row space-between approved-{{ user.approved }}">

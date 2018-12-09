@@ -121,28 +121,33 @@ addCenterForm: FormGroup
         this.addCenter(newCenter);
       }
     }
-
-    deleteDonation(idDonation) {
-      this.db.object('donations/' + idDonation).snapshotChanges().subscribe(docSnapshot => {
-        if (docSnapshot.key) {
-          this.db.list('donations/').remove(idDonation).then(
-            e => {
-          this.centerKeys = [];
-          this.getCenterKeys()
-          console.log(this.centerKeys);
-            }
-          )
-        }});
-    }
     
     clearDonations() {
       return this.db.list('users/')
       .snapshotChanges().subscribe(
         snapshot => {
           snapshot.forEach(e => {
-            this.deleteDonation(e.key);
+            let idDonation = e.key;
+            this.db.object('donations/' + idDonation).snapshotChanges().subscribe(docSnapshot => {
+              if (docSnapshot.key) {
+                this.db.list('donations/').remove(idDonation)
+                
+              }});
           });
         })
     }
     
+    clearRequests() {
+      return this.db.list('requests/')
+      .snapshotChanges().subscribe(
+        snapshot => {
+          snapshot.forEach(e => {
+            let idReq = e.key;
+            this.db.object('requests/' + idReq).snapshotChanges().subscribe(docSnapshot => {
+              if (docSnapshot.key) {
+                this.db.list('requests/').remove(idReq)
+              }});
+          });
+        })
+    }
   }

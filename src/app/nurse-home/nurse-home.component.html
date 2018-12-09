@@ -1,3 +1,39 @@
 <p>
-  nurse-home works!
+  Cauta donatori:
 </p>
+<form [formGroup]="newRequestForm">
+<mat-form-field>
+  <mat-select placeholder="Grupa" formControlName="bloodType">
+    <mat-option *ngFor="let type of types" [value]="type">
+      {{type}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="RH" formControlName="rh">
+    <mat-option *ngFor="let rh of rhs" [value]="rh">
+      {{rh}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<button (click)='onSubmit()' mat-raised-button>
+  Cauta
+</button>
+</form>
+
+<mat-list>
+  <mat-list-item *ngFor="let stock of stocks | async; let i = index">
+    {{ stock | json}}
+  </mat-list-item>
+</mat-list>
+
+<mat-list>
+  <mat-list-item *ngFor="let u of filteredUsers | async; let i = index">
+    User:
+    {{ u.email }} {{u.firstName}} {{u.lastName}} {{ u.group | json }} {{ u.rh | json }}
+    , Dist (Km) pana la centru:
+    {{ getDistance(u) | json }}
+  </mat-list-item>
+</mat-list>

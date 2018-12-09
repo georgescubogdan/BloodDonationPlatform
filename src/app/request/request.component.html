@@ -26,6 +26,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Prioritate" formControlName="priority">
+        <mat-option *ngFor="let priority of priorities" [value]="priority.id">
+          {{priority.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   <button (click)='onSubmit()' mat-raised-button>
     Adauga
   </button>

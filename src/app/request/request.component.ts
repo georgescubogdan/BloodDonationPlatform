@@ -13,6 +13,20 @@ export class RequestComponent implements OnInit {
   types = ['A', 'B', 'O', 'AB'];
   rhs = ['+', '-'];
   units = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  priorities = [
+    {
+      name: 'Urgenta Majora',
+      id: 3
+    },
+    {
+      name: 'Urgenta',
+      id: 2
+    },
+    {
+      name: 'Rezista si fara',
+      id: 1
+    }
+  ]
   constructor(private formBuilder: FormBuilder, private db: AngularFireDatabase, private router: Router) { }
 
   ngOnInit() {
@@ -20,7 +34,8 @@ export class RequestComponent implements OnInit {
       name: ['', Validators.required],
       bloodType: ['', Validators.required],
       rh: ['', Validators.required],
-      quantity: ['', Validators.required]
+      quantity: ['', Validators.required],
+      priority: ['', Validators.required]
     });
   }
 

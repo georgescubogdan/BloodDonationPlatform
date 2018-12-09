@@ -50,7 +50,7 @@ h3 {
   top: -20px;
   padding: 5px;
   border-radius: 4px;
-  background-color: #cc0000;
+  /* background-color: #cc0000; */
   color: white;
   font-weight: bold;
 }

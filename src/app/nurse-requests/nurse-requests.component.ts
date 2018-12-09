@@ -39,6 +39,18 @@ export class NurseRequestsComponent implements OnInit {
         )))
     );
   }
+
+  
+  getColor(priority) { 
+    switch (priority) {
+      case 1:
+        return 'yellow';
+      case 2:
+        return 'orange';
+      case 3:
+        return '#cc0000';
+    }
+  }
   
   distanceBetweenTwoPoints(lat1, lon1, lat2, lon2, unit="K") {
     if ((lat1 == lat2) && (lon1 == lon2)) {

@@ -29,4 +29,15 @@ export class RequestsComponent implements OnInit {
         });
       })
   }
+
+  getColor(priority) { 
+    switch (priority) {
+      case 1:
+        return 'yellow';
+      case 2:
+        return 'orange';
+      case 3:
+        return 'red';
+    }
+  }
 }

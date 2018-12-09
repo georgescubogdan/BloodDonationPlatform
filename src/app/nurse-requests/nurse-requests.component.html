@@ -1,6 +1,6 @@
 <ul>
   <li *ngFor="let request of requests | async; let i = index" class="row">
-    <div class="badge">
+    <div class="badge" [ngStyle]="{'background-color':getColor(request.priority)}">
       {{ request.bloodType }}{{ request.rh }}
     </div>
     <div *ngIf="request.finalized" class="finalized">&#10004;</div>

@@ -50,7 +50,7 @@ h3 {
   top: -20px;
   padding: 5px;
   border-radius: 4px;
-  /* background-color: #cc0000; */
+  background-color: #cc0000;
   color: white;
   font-weight: bold;
 }
@@ -64,4 +64,47 @@ h3 {
   background-color: #28a745;
   color: white;
   font-weight: bold;
+}
+
+.priority-indicator {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: absolute;
+  right: 50px;
+  bottom: calc(100% + 1px);
+  width: 60px;
+  height: 25px;
+}
+
+.priority-indicator .level {
+  width: calc((100% / 3) - 3px);
+  background-color: #f0f0f0;
+}
+
+.priority-indicator .level:first-child {
+  height: 33%;
+}
+
+.priority-indicator .level:nth-child(2) {
+  height: 66%;
+}
+
+.priority-indicator .level:last-child {
+  height: 100%;
+}
+
+.priority-value1 .level:first-child {
+  background-color: yellow;
+}
+
+.priority-value2 .level:first-child,
+.priority-value2 .level:nth-child(2) {
+  background-color: orange;
+}
+
+.priority-value3 .level:first-child,
+.priority-value3 .level:nth-child(2),
+.priority-value3 .level:last-child {
+  background-color: red;
 }

@@ -3,6 +3,8 @@ import { NgForm, FormBuilder, Validators, FormGroup, FormsModule, ReactiveFormsM
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { MessagingService } from '../messaging.service';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -18,12 +20,14 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   returnUrl: string;
+  message: BehaviorSubject<any>;
 
   constructor(private formBuilder: FormBuilder,
     private _authService: AuthService,
     private _router: Router,
     private route: ActivatedRoute,
-    private db: AngularFireDatabase) { }
+    private db: AngularFireDatabase,
+    private msgService: MessagingService) { }
 
 
     ngOnInit() {
@@ -37,6 +41,7 @@ export class LoginComponent implements OnInit {
 
       // get return url from route parameters or default to '/'
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
     }
 
     // convenience getter for easy access to form fields
@@ -60,6 +65,9 @@ export class LoginComponent implements OnInit {
                 if (userData != null) {
                   this.db.object('users/' + userData.uid + '/roles').valueChanges().subscribe(
                     roles => {
+                      this.msgService.getPermission();
+                      this.msgService.receiveMessage();
+                      this.message = this.msgService.currentMessage;
                       if (roles['doctor'] === true) {
                         this._router.navigate(["/home"]);
                       } else if (roles['nurse'] === true) {

@@ -29,6 +29,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 import {AgmCoreModule} from '@agm/core';
+import { MessagingService } from './messaging.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +70,8 @@ import {AgmCoreModule} from '@agm/core';
   providers: [
     AuthorizationService,
     AuthService,
-    AngularFireDatabase
+    AngularFireDatabase,
+    MessagingService
   ],
   bootstrap: [AppComponent]
 })

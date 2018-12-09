@@ -1,15 +1,35 @@
-<mat-list>
-  <mat-list-item *ngFor="let request of requests | async; let i = index;">
-    {{ request | json}}
-    <button (click)="completeRequest(i)">
-      Complete request
-    </button>
-    <input placeholder="quantity" [(ngModel)]="qty[i]">
-    <button (click)="sendBlood(i)">
-      Send Blood
-    </button>
-  </mat-list-item>
-</mat-list>
+<ul>
+  <li *ngFor="let request of requests | async; let i = index" class="row">
+    <div class="badge">
+      {{ request.bloodType }}{{ request.rh }}
+    </div>
+    <div *ngIf="request.finalized" class="finalized">&#10004;</div>
+    <div class="col" style="flex: auto">
+      <h3>
+        {{ request.name }}
+      </h3>
+      <mat-progress-bar mode="determinate" value="{{ request.recvQuantity/request.quantity * 100 }}"></mat-progress-bar>
+      <div class="row space-between" style="border-color: transparent; margin: 10px 0">
+        <div class="col">
+          0
+        </div>
+        <div class="col">
+          blood quantity
+        </div>
+        <div class="col">
+          {{ request.quantity }}
+        </div>
+      </div>
+      <button (click)="completeRequest(i)">
+        Complete request
+      </button>
+      <input placeholder="quantity" [(ngModel)]="qty[i]">
+      <button (click)="sendBlood(i)">
+        Send Blood
+      </button>
+    </div>
+  </li>
+</ul>
 
 <mat-list>
   <mat-list-item *ngFor="let stock of stocks | async; let i = index">
@@ -32,4 +52,3 @@
     {{ c | json}}
   </mat-list-item>
 </mat-list>
-

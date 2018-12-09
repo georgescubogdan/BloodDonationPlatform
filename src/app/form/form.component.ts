@@ -50,12 +50,30 @@ export class FormComponent implements OnInit {
     } else if (this.otherRestrictions.length != 0) {
       return false;
     }
-
     return true;
   }
 
-  submit() {
+  async submit() {
     this.canDonate = this.isEligible();
+
+    let myData = {};
+    let uid = this.afAuth.auth.currentUser.uid;
+    let stockSnapshot = this.db.object('users/' + uid).snapshotChanges().pipe(take(1));
+    stockSnapshot.subscribe(docSnapshot => {
+      if (docSnapshot['key']) {
+        let o = docSnapshot.payload.val();
+        myData = o;
+      }});
+    await wait(100);
+    console.log(myData);
+    console.log(this.canDonate)
+
+    if (myData.hasOwnProperty('lastDonationDate'))
+    {
+      console.log(myData['lastDonationDate']);
+      // TODO: verifica distanta fata de ziua curenta
+    }
+
     this.formCompleted = true;
   }
 
@@ -68,11 +86,15 @@ export class FormComponent implements OnInit {
     let yyyy = today.getFullYear();
     let date = mm + '/' + dd + '/' + yyyy;
 
+    this.db.list('users/').update(uid, {
+      lastDonationDate: date
+    });
+
     let myData = {};
 
     let stockSnapshot = this.db.object('users/' + uid).snapshotChanges().pipe(take(1));
     stockSnapshot.subscribe(docSnapshot => {
-      if (docSnapshot['key']) {
+      if (docSnapshot['key']) {  
         let o = docSnapshot.payload.val();
         // console.log(o);
         myData = o;

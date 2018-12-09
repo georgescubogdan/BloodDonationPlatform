@@ -95,7 +95,8 @@ export class AuthService {
                 coordinates: additionalData,
                 approved: false,
                 group: value.group,
-                rh: value.rh
+                rh: value.rh,
+                lastDonationDate: false                
               });
             }});
           resolve(res);

@@ -62,7 +62,7 @@ export class NurseRequestsComponent implements OnInit {
   }
 
   getDistance(user) {
-    // blood center
+    // mock blood center
     let lat_ref = 45;
     let lon_ref = 25;
 
@@ -180,15 +180,7 @@ export class NurseRequestsComponent implements OnInit {
     console.log(key);
     console.log(qNeeded);
     console.log(myData);
-
-    // stockSnapshot = this.db.object('stock/' + key).snapshotChanges().pipe(take(1));
-    // stockSnapshot.subscribe(docSnapshot => {
-    //   if (docSnapshot['key']) {
-    //     console.log(docSnapshot['payload'].val())
-    //     this.db.object('stock/' + key).update({
-    //       quantity: docSnapshot['payload'].val()['quantity'] + quantity,
-    //     });
-    //   }});
+    
     snapshot.subscribe(docSnapshot => {
       if (docSnapshot.key && !docSnapshot.payload.val()['finalized']) {
         console.log('verif ' + myData[key]['quantity'] + ' > ' + qNeeded);

@@ -123,7 +123,7 @@ addCenterForm: FormGroup
     }
     
     clearDonations() {
-      return this.db.list('users/')
+      return this.db.list('donations/')
       .snapshotChanges().subscribe(
         snapshot => {
           snapshot.forEach(e => {

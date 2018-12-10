@@ -25,7 +25,7 @@ export class NurseRequestsComponent implements OnInit {
   public qty: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
   constructor(private db: AngularFireDatabase) { 
-    this.requests = this.db.list('requests/').valueChanges();
+    this.requests = this.db.list('requests/', ref => ref.orderByChild('finalized')).valueChanges();
     this.stocks = this.db.list('stock/').valueChanges();
     this.users = this.db.list('users/').valueChanges();
     this.centers = this.db.list('centers/').valueChanges();
@@ -109,7 +109,7 @@ export class NurseRequestsComponent implements OnInit {
   }
 
   getRequestKeys() {
-    return this.db.list('requests/')
+    return this.db.list('requests/', ref => ref.orderByChild('finalized'))
     .snapshotChanges().subscribe(
       snapshot => {
         snapshot.forEach(e => {

@@ -1,39 +1,46 @@
-<form [formGroup]="newRequestForm" style="margin: 0 30px; width:unset">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Nume Pacient" formControlName="name">
-  </mat-form-field>
 
-  <mat-form-field>
-    <mat-select placeholder="Grupa" formControlName="bloodType">
-      <mat-option *ngFor="let type of types" [value]="type">
-        {{type}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-select placeholder="RH" formControlName="rh">
-      <mat-option *ngFor="let rh of rhs" [value]="rh">
-        {{rh}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-      <mat-select placeholder="Nr. Unitati" formControlName="quantity">
-        <mat-option *ngFor="let unit of units" [value]="unit">
-          {{unit}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Prioritate" formControlName="priority">
-        <mat-option *ngFor="let priority of priorities" [value]="priority.id">
-          {{priority.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  <button (click)='onSubmit()' mat-raised-button>
-    Adauga
-  </button>
-</form>
+<mat-card class="example-card">
+  <mat-card-content>
+    <form [formGroup]="newRequestForm">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nume Pacient" formControlName="name">
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="Grupa" formControlName="bloodType">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{type}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="RH" formControlName="rh">
+          <mat-option *ngFor="let rh of rhs" [value]="rh">
+            {{rh}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="Nr. Unitati" formControlName="quantity">
+          <mat-option *ngFor="let unit of units" [value]="unit">
+            {{unit}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="Prioritate" formControlName="priority">
+          <mat-option *ngFor="let priority of priorities" [value]="priority.id">
+            {{priority.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="example-full-width">
+        <button (click)='onSubmit()' mat-raised-button>
+          Adauga
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

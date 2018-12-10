@@ -20,6 +20,46 @@
               <span>{{ result.lastName }}</span>
             </div>
           </div>
+          <div *ngIf="!result.pending" class="col">
+            <div style="font-weight: bold">
+              <span>VEM: </span>
+              <span>{{ result.VEM }}</span>
+            </div>
+            <div style="font-weight: bold">
+              <span>GLC: </span>
+              <span>{{ result.GLC }}</span>
+            </div>
+          </div>
+          <div *ngIf="!result.pending" class="col">
+            <div style="font-weight: bold">
+              <span>HEM: </span>
+              <span>{{ result.HEM }}</span>
+            </div>
+            <div style="font-weight: bold">
+              <span>CHEM: </span>
+              <span>{{ result.CHEM }}</span>
+            </div>
+          </div>
+          <div *ngIf="!result.pending" class="col">
+            <div style="font-weight: bold">
+              <span>TGP: </span>
+              <span>{{ result.TGP }}</span>
+            </div>
+            <div style="font-weight: bold">
+              <span>TGO: </span>
+              <span>{{ result.TGO }}</span>
+            </div>
+          </div>
+          <div *ngIf="!result.pending" class="col">
+            <div style="font-weight: bold">
+              <span>GGT: </span>
+              <span>{{ result.GGT }}</span>
+            </div>
+            <div style="font-weight: bold">
+              <span>HDL: </span>
+              <span>{{ result.HDL }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

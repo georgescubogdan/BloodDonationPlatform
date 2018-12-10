@@ -4,6 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { NgForm, FormBuilder, Validators, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { take } from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material';
 const wait = (ms) => new Promise(res => setTimeout(res, ms));
 
 @Component({
@@ -24,7 +25,8 @@ export class FormComponent implements OnInit {
     public afAuth: AngularFireAuth, 
     private db: AngularFireDatabase, 
     private router: Router, 
-    private formBuilder: FormBuilder,) { }
+    private formBuilder: FormBuilder,
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.donationForm = this.formBuilder.group({
@@ -72,6 +74,17 @@ export class FormComponent implements OnInit {
     {
       console.log(myData['lastDonationDate']);
       // TODO: verifica distanta fata de ziua curenta
+      let today = new Date();
+      let ms = (today.getTime() - new Date(myData['lastDonationDate']).getTime()) / 86400000;
+      if (ms < 90) {
+        console.log("Nu a trecut suficient timp de la ultima donatie");
+        this.canDonate = false;
+        let snackBarRef = this.snackBar.open('Nu a trecut suficient timp de la ultima donare de sange!', 'Ok', {
+          duration: 5000,
+        });
+       // snackBarRef.onAction().subscribe(()=> this.router.navigate(['/user/donate']));
+      }
+      console.log(ms)
     }
 
     this.formCompleted = true;

@@ -1,7 +1,7 @@
 <p>
   Cauta donatori:
 </p>
-<form [formGroup]="newRequestForm">
+<form [formGroup]="newRequestForm" style="margin-left: auto; margin-right: auto; width: 100%">
 <mat-form-field>
   <mat-select placeholder="Grupa" formControlName="bloodType">
     <mat-option *ngFor="let type of types" [value]="type">
@@ -21,7 +21,11 @@
 <button (click)='onSubmit()' mat-raised-button>
   Cauta
 </button>
+<button (click)='notifyUsers(newRequestForm.value.bloodType, newRequestForm.value.rh)' mat-raised-button>
+  Notifica
+</button>
 </form>
+
 
 <ul>
   <li *ngFor="let stock of stocks | async; let i = index">

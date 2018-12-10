@@ -74,7 +74,7 @@ export class AuthService {
       });
     }
 
-    doRegister(value, additionalData): Promise<any>{
+    doRegister(value, additionalData = null): Promise<any>{
       console.log(value.email);
       return new Promise<any>((resolve, reject) => {
         let provider = new firebase.auth.EmailAuthProvider();
@@ -86,6 +86,8 @@ export class AuthService {
             if (!docSnapshot.key) {
               let roles_tmp = { user: false, doctor: false, nurse: false}
               roles_tmp[value.role] = true;
+              let groupRh: String = value.group + value.rh;
+              console.log(groupRh)
               this.db.object('users/' + res.user.uid).set({
                 email: value.email,
                 photoURL: "",
@@ -96,6 +98,7 @@ export class AuthService {
                 approved: false,
                 group: value.group,
                 rh: value.rh,
+                groupRH: groupRh,
                 lastDonationDate: false                
               });
             }});

@@ -5,7 +5,7 @@ import { map, filter, take } from 'rxjs/operators';
 import { MatYearView } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import * as _ from 'lodash';
 const wait = (ms) => new Promise(res => setTimeout(res, ms));
 
 @Component({
@@ -28,6 +28,9 @@ export class NurseHomeComponent implements OnInit {
   userKeys: any[] = [];
   requestKeys: any[] = [];
   stockKeys: any[] = [];
+  filteredKeysByGroup: any[] = [];
+  filteredKeysByRole: any[] = [];
+  filteredKeys: any[] = [];
   req;
   public qty: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
@@ -109,7 +112,8 @@ export class NurseHomeComponent implements OnInit {
     this.getStockKeys();
     this.getUserKeys();
     this.getCenters();
-    console.log(this.centersList);
+    //this.notifyUsers();
+    
    // console.log(this.getRequestsData());
 
    // TODO filtreaza dupa grupa
@@ -128,6 +132,51 @@ export class NurseHomeComponent implements OnInit {
 
        )))
    );
+
+
+  }
+
+  async notifyUsers(group, rh) {
+    this.getfilteredKeysByRole('user');
+    this.getfilteredKeysByGroup(group, rh);
+    await wait(100);
+    this.filteredKeys = _.intersection(this.filteredKeysByGroup, this.filteredKeysByRole);
+    // console.log(this.filteredKeysByGroup);
+    // console.log(this.filteredKeysByRole);
+    // console.log(this.filteredKeys);
+    this.filteredKeys.forEach(key => {
+      this.db.list('notify/' + key).push(
+        {
+          title: 'Am nevoieee de tineeeee!',
+          body: 'Sa imi donezi! Am nevoieee de tineeeee!'
+        }
+      );
+    });
+    
+  }
+
+  getfilteredKeysByGroup(group, rh) {
+    return this.db.list('users/', ref => ref.orderByChild('groupRH').equalTo(group+rh))
+      .snapshotChanges().subscribe(
+          snapshot => {
+            snapshot.forEach(e => {
+              if (!this.filteredKeysByGroup.includes(e.key)) {
+                this.filteredKeysByGroup.push(e.key);
+              }
+            });
+          })
+  }
+
+  getfilteredKeysByRole(role) {
+    return this.db.list('users/', ref => ref.orderByChild('roles/' + role).startAt(true).endAt(true))
+      .snapshotChanges().subscribe(
+          snapshot => {
+            snapshot.forEach(e => {
+              if (!this.filteredKeysByRole.includes(e.key)) {
+                this.filteredKeysByRole.push(e.key);
+              }
+            });
+          })
   }
 
   onSubmit() {

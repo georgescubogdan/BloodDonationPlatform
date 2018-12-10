@@ -1,3 +1,55 @@
-<p>
-  home works!
-</p>
+<mat-card *ngIf="!authorization.isApproved && authorization.isLoggedIn" class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Ne pare rau!</mat-card-title>
+    <mat-card-subtitle>Contul nu a fost validat</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://sd.keepcalm-o-matic.co.uk/i-w600/too-bad-so-sad-.jpg" alt="Too bad. #sosad">
+  <mat-card-content>
+    <p>
+      Pentru validarea contului trebuie contactat un administrator!
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="authorization.isApproved && authorization.isLoggedIn && authorization.isNurse" class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Bun venit!</mat-card-title>
+    <mat-card-subtitle>Sa incepem!</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="http://nursing.advanceweb.com/wp-content/uploads/sites/8/2018/10/nurse_innovators-904790024_900x.jpg" alt="Too bad. #sosad">
+  <mat-card-content>
+    <p>
+      Pentru a continua alege una din optinuile din bara de navigare!
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="authorization.isApproved && authorization.isLoggedIn && authorization.isUser" class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Bun venit!</mat-card-title>
+    <mat-card-subtitle>Sa incepem!</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.png" alt="Too bad. #sosad">
+  <mat-card-content>
+    <p>
+      Pentru a continua alege una din optinuile din bara de navigare!
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="authorization.isApproved && authorization.isLoggedIn && authorization.isDoctor" class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Bun venit!</mat-card-title>
+    <mat-card-subtitle>Sa incepem!</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="http://radiosud.ro/wp-content/uploads/2018/08/men-health-doctors-wyza-com-au.jpg" alt="Too bad. #sosad">
+  <mat-card-content>
+    <p>
+      Pentru a continua alege una din optinuile din bara de navigare!
+    </p>
+  </mat-card-content>
+</mat-card>

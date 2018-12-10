@@ -5,8 +5,9 @@
   <span class="example-fill-remaining-space"></span>
   <button mat-button>Despre Noi</button>
   <button mat-button>Contact</button>
+  <button *ngIf="!authorization.isApproved && authorization.isLoggedIn" mat-button (click)="Logout()">Logout</button>
 
-  <button *ngIf="authorization.isUser || authorization.isDoctor || authorization.isNurse || authorization.isAdmin" mat-button [matMenuTriggerFor]="menu">
+  <button *ngIf="(authorization.isUser || authorization.isDoctor || authorization.isNurse || authorization.isAdmin) && authorization.isApproved" mat-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">

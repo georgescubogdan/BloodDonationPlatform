@@ -8,6 +8,8 @@ import * as _ from 'lodash'
 })
 export class AuthorizationService {
   userRoles: Array<string>;
+  approved: boolean = false;
+  loggedIn: boolean = false;
   /// the rule
  
   get isUser(): boolean {
@@ -30,7 +32,12 @@ export class AuthorizationService {
     return this.matchingRole(allowed);
   }
 
-
+  get isApproved(): boolean {
+    return this.approved;
+  }
+  get isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
 
   /// Determine if any matching roles exist
   private matchingRole(allowedRoles): boolean {
@@ -47,5 +54,15 @@ export class AuthorizationService {
         //_.findKey(object, predicate, [context]) 
       }))
       .subscribe();
+      auth.user.pipe(map(user => {
+        console.log(_.get(user, 'approved'))
+        console.log(user)
+        if (user == null) {
+          this.loggedIn = false;
+        } else {
+          this.loggedIn = true;
+        }
+        return this.approved = _.get(user, 'approved')
+      })).subscribe();
     }
 }

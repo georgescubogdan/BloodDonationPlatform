@@ -71,6 +71,7 @@ li button:hover {
 .wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .wrapper li {

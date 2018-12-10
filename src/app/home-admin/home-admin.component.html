@@ -1,5 +1,5 @@
-<button (click)="clearDonations()">Sterge donatii</button>
-<button (click)="clearRequests()">Sterge cereri</button>
+<button (click)="clearDonations()" class="blue-button">Sterge donatii</button>
+<button (click)="clearRequests()" class="blue-button">Sterge cereri</button>
 
 <ul>
   <li *ngFor="let user of users | async; let i = index" class="row space-between approved-{{ user.approved }}">
@@ -39,12 +39,6 @@
   </li>
 </ul>
 
-<!-- <mat-list>
-  <mat-list-item *ngFor="let center of centers | async; let i = index">
-    {{ center | json}}
-    <button (click)="deleteCenter(i)">Sterge</button>
-  </mat-list-item>
-</mat-list> -->
 <ul class="wrapper">
   <li *ngFor="let c of centers | async; let i = index">
     <div class="donation-center">

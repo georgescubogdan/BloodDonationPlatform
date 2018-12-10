@@ -1,9 +1,153 @@
 <div *ngFor="let user of donations; let j = index">
-  <mat-list>
-    <mat-list-item *ngFor="let donation of user | async; let i = index">
-      {{ donation | json}}
-      <button (click)="analyze(j, i)">Analizeaza</button>
+  <ul>
+    <li *ngFor="let donation of user | async; let i = index" style="color:#3f51b5">
+      <div class="row space-between  pending-{{donation.pending}}">
+        <div class="badge">
+          {{ donation.group }}{{ donation.rh }}
+        </div>
+        <div *ngIf="!donation.pending" class="finalized">Donated &#10004;</div>
+        <div class="col">
+          <div class="row pending-{{donation.pending}}" style="border:none; margin: 15px 0">
+            <div class="col photo">
+              <img src="../../assets/images/default-user.png" alt="user">
+            </div>
+            <div class="col" style="font-weight:bold">
+              <div>
+                <span>Date: </span>
+                <span>{{ donation.date }}</span>
+              </div>
+              <div>
+                <span>First Name: </span>
+                <span>{{ donation.firstName }}</span>
+              </div>
+              <div>
+                <span>Last Name: </span>
+                <span>{{ donation.lastName }}</span>
+              </div>
+              <div>
+                <span>E-mail: </span>
+                <span>{{ donation.email }}</span>
+              </div>
+            </div>
+              <div class="col" style="display:flex; flex-flow: column; align-items:center; justify-content:center">
+                <div>CHEM</div>
+                <div>{{ donation.CHEM }}</div>
+              </div>
+              <div class="col" style="display:flex; flex-flow: column; align-items:center; justify-content:center">
+                <div>GGT</div>
+                <div>{{ donation.GGT }}</div>
+              </div>
+              <div class="col" style="display:flex; flex-flow: column; align-items:center; justify-content:center">
+                <div>GLC</div>
+                <div>{{ donation.GLC }}</div>
+              </div>
+              <div class="col" style="display:flex; flex-flow: column; align-items:center; justify-content:center">
+                <div>HDL</div>
+                <div>{{ donation.HDL }}</div>
+              </div>
+              <div class="col" style="display:flex; flex-flow: column; align-items:center; justify-content:center">
+                <div>HEM</div>
+                <div>{{ donation.HEM }}</div>
+              </div>
+              <div class="col" style="display:flex; flex-flow: column; align-items:center; justify-content:center">
+                <div>LDL</div>
+                <div>{{ donation.LDL }}</div>
+              </div>
+              <div class="col" style="display:flex; flex-flow: column; align-items:center; justify-content:center">
+                <div>TGO</div>
+                <div>{{ donation.TGO }}</div>
+              </div>
+              <div class="col" style="display:flex; flex-flow: column; align-items:center; justify-content:center">
+                <div>TGP</div>
+                <div>{{ donation.TGP }}</div>
+              </div>
+              <div class="col" style="display:flex; flex-flow: column; align-items:center; justify-content:center">
+                <div>VEM</div>
+                <div>{{ donation.VEM }}</div>
+              </div>
 
-    </mat-list-item>
-  </mat-list>
+          </div>
+        </div>
+
+        <div class="col">
+          <button (click)="analyze(j, i)" style="padding:15px;">Analyze</button>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
+
+<!-- <ul>
+  <li *ngFor="let u of filteredUsers | async; let i = index" style="color:#3f51b5">
+    <div class="row space-between">
+      <div class="badge">
+        {{ donation.group }}{{ donation.rh }}
+      </div>
+      <div *ngIf="!result.pending" class="finalized">Donated &#10004;</div>
+      <div class="col">
+        <div class="row" style="border:none; margin: 15px 0">
+          <div class="col photo">
+            <img *ngIf="u.photoURL === ''" src="../../assets/images/default-user.png" alt="user">
+            <img *ngElse src="user.photoURL" alt="user">
+          </div>
+          <div class="col">
+            <div>
+              <span>First Name: </span>
+              <span>{{ donation.firstName }}</span>
+            </div>
+            <div>
+              <span>Last Name: </span>
+              <span>{{ donation.lastName }}</span>
+            </div>
+            <div>
+              <span>E-mail: </span>
+              <span>{{ donation.email }}</span>
+            </div>
+          </div>
+          <div class="col">
+            <div>
+              <span>CHEM: </span>
+              <span>{{ donation.CHEM }}</span>
+            </div>
+            <div>
+              <span>GGT: </span>
+              <span>{{ donation.GGT }}</span>
+            </div>
+            <div>
+              <span>GLC: </span>
+              <span>{{ donation.GLC }}</span>
+            </div>
+            <div>
+              <span>HDL: </span>
+              <span>{{ donation.HDL }}</span>
+            </div>
+            <div>
+              <span>HEM: </span>
+              <span>{{ donation.HEM }}</span>
+            </div>
+            <div>
+              <span>LDL: </span>
+              <span>{{ donation.LDL }}</span>
+            </div>
+            <div>
+              <span>TGO: </span>
+              <span>{{ donation.TGO }}</span>
+            </div>
+            <div>
+              <span>TGP: </span>
+              <span>{{ donation.TGP }}</span>
+            </div>
+            <div>
+              <span>VEM: </span>
+              <span>{{ donation.VEM }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <span>Distance to the donating center: </span>
+        <span style="font-weight:bold">{{ getDistance(u).toFixed(2) }} km</span>
+      </div>
+    </div>
+  </li>
+</ul> -->

@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
       this.registerForm = this.formBuilder.group({
         email: ['', [Validators.email, Validators.required]],
         firstName: ['', Validators.required],
-        address: ['', Validators.required],
+        address: [''],
         coordinates: [''],
         lastName: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(6)]],
@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
     
     onSubmit() {
       this.submitted = true;
-      
+      console.log("intra")
       // stop here if form is invalid
       if (this.registerForm.invalid) {
         return;

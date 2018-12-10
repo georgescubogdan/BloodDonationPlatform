@@ -39,6 +39,23 @@
   </li>
 </ul>
 
+<div class="example-container">
+
+    <form class="example-form" [formGroup]="addCenterForm" style="margin: 0 30px; width:unset">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nume Centru" formControlName="name">
+      </mat-form-field>
+  
+      <mat-form-field class="example-full-width">
+        <input matInput class="form-control" placeholder="Type address" matGoogleMapsAutocomplete [country]="ro" formControlName="address" (onLocationSelected)="onLocationSelected($event)">
+      </mat-form-field>
+  
+      <button (click)='onSubmit()' mat-raised-button class="blue-button">
+        Adauga
+      </button>
+    </form>
+  </div>
+
 <ul class="wrapper">
   <li *ngFor="let c of centers | async; let i = index">
     <div class="donation-center">
@@ -61,19 +78,4 @@
   </li>
 </ul>
 
-<div class="example-container">
 
-  <form class="example-form" [formGroup]="addCenterForm" style="margin: 0 30px; width:unset">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Nume Centru" formControlName="name">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <input matInput class="form-control" placeholder="Type address" matGoogleMapsAutocomplete [country]="ro" formControlName="address" (onLocationSelected)="onLocationSelected($event)">
-    </mat-form-field>
-
-    <button (click)='onSubmit()' mat-raised-button class="blue-button">
-      Adauga
-    </button>
-  </form>
-</div>

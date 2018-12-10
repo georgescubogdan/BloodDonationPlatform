@@ -70,7 +70,7 @@
         </div>
 
         <div class="col">
-          <button (click)="analyze(j, i)" style="padding:15px;">Analyze</button>
+          <button *ngIf="donation.pending" (click)="analyze(j, i)" style="padding:15px;">Analyze</button>
         </div>
       </div>
     </li>

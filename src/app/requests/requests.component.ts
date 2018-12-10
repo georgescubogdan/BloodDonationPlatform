@@ -11,7 +11,7 @@ export class RequestsComponent implements OnInit {
   requests: Observable<any[]>;
   requestKeys: any[] = [];
   constructor(private db: AngularFireDatabase) { 
-    this.requests = this.db.list('requests/').valueChanges();
+    this.requests = this.db.list('requests/', ref => ref.orderByChild('finalized')).valueChanges();
   }
 
   ngOnInit() {
@@ -19,7 +19,7 @@ export class RequestsComponent implements OnInit {
   }
 
   getRequestKeys() {
-    return this.db.list('requests/')
+    return this.db.list('requests/', ref => ref.orderByChild('finalized'))
     .snapshotChanges().subscribe(
       snapshot => {
         snapshot.forEach(e => {

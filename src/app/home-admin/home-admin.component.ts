@@ -21,7 +21,7 @@ export class HomeAdminComponent implements OnInit {
   additionalData: any;
 
   constructor(private formBuilder: FormBuilder, private db: AngularFireDatabase) { 
-    this.users = this.db.list('users/').valueChanges();
+    this.users = this.db.list('users/', ref => ref.orderByChild('approved')).valueChanges();
     this.centers = this.db.list('centers/').valueChanges();
   }
   
@@ -57,7 +57,7 @@ addCenterForm: FormGroup
     this.additionalData = coordinates;
   }
   getUserKeys() {
-    return this.db.list('users/')
+    return this.db.list('users/', ref => ref.orderByChild('approved'))
     .snapshotChanges().subscribe(
       snapshot => {
         snapshot.forEach(e => {

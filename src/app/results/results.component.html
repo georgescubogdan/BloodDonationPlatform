@@ -1,5 +1,27 @@
-<mat-list>
-  <mat-list-item *ngFor="let result of results | async; let i = index">
-    {{ result | json}}
-  </mat-list-item>
-</mat-list>
+<ul>
+  <li *ngFor="let result of results | async; let i = index" style="color:#3f51b5">
+    <div class="row space-between pending-{{result.pending}}">
+      <div class="badge">
+        {{ result.group }}{{ result.rh }}
+      </div>
+      <div *ngIf="!result.pending" class="finalized">Donated &#10004;</div>
+      <div class="col">
+        <div class="row pending-{{result.pending}}" style="border:none; margin: 15px 0">
+          <div class="col" style="font-weight: bold">
+            {{ result.date }}
+          </div>
+          <div class="col">
+            <div style="font-weight: bold">
+              <span>First Name: </span>
+              <span>{{ result.firstName }}</span>
+            </div>
+            <div style="font-weight: bold">
+              <span>Last Name: </span>
+              <span>{{ result.lastName }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

@@ -38,8 +38,21 @@
   </li>
 </ul>
 
-<mat-list>
-  <mat-list-item *ngFor="let c of centers | async; let i = index">
-    {{ c | json}}
-  </mat-list-item>
-</mat-list>
+<ul class="wrapper">
+  <li *ngFor="let c of centers | async; let i = index">
+    <div class="donation-center">
+      <div class="name">
+        <span>{{ c.name }}</span>
+      </div>
+      <div class="image"></div>
+      <div class="angle-x"></div>
+      <div class="angle-y"></div>
+      <div class="longitude">
+        {{ c.coordinates.longitude.toFixed(4) }}
+      </div>
+      <div class="latitude">
+        {{ c.coordinates.latitude.toFixed(4) }}
+      </div>
+    </div>
+  </li>
+</ul>

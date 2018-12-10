@@ -19,7 +19,7 @@
   <button *ngIf="authorization.isDoctor" [routerLink]="['/doctor/request']" routerLinkActive="router-link-active" mat-menu-item>Cerere Noua</button>
   <button *ngIf="authorization.isDoctor" [routerLink]="['/doctor/requests']" routerLinkActive="router-link-active" mat-menu-item>Cereri</button>
   <!-- <button *ngIf="authorization.isDoctor" [routerLink]="['/doctor/settings']" routerLinkActive="router-link-active" mat-menu-item>Setari</button> -->
-  <button *ngIf="authorization.isNurse"  [routerLink]="['/nurse/home']" routerLinkActive="router-link-active" mat-menu-item>Acasa</button>
+  <button *ngIf="authorization.isNurse"  [routerLink]="['/nurse/stocks']" routerLinkActive="router-link-active" mat-menu-item>Stocuri si Donatori</button>
   <button *ngIf="authorization.isNurse"  [routerLink]="['/nurse/donations']" routerLinkActive="router-link-active" mat-menu-item>Donatii</button>
   <button *ngIf="authorization.isNurse"  [routerLink]="['/nurse/requests']" routerLinkActive="router-link-active" mat-menu-item>Cereri</button>
   <button *ngIf="authorization.isAdmin"  [routerLink]="['/admin/users']" routerLinkActive="router-link-active" mat-menu-item>Utilizatori</button>

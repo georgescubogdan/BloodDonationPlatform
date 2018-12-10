@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'doctor/request', component: RequestComponent, canActivate: [DoctorGuard] },
   { path: 'doctor/requests', component: RequestsComponent, canActivate: [DoctorGuard] },
   { path: 'doctor/settings', component: DoctorSettingsComponent, canActivate: [DoctorGuard] },
-  { path: 'nurse/home', component: NurseHomeComponent,  canActivate: [NurseGuard] },
+  { path: 'nurse/stocks', component: NurseHomeComponent,  canActivate: [NurseGuard] },
   { path: 'nurse/donations', component: NurseDonationsComponent,  canActivate: [NurseGuard] },
   { path: 'nurse/requests', component: NurseRequestsComponent,  canActivate: [NurseGuard] },
   { path: 'user/home', component: UserHomeComponent,  canActivate: [UserGuard] },

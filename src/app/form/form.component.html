@@ -1,286 +1,308 @@
 <mat-card *ngIf="!formCompleted">
-
-  <mat-card-title>    
-    Formular de inscriere pentru donarea de sange   
-  </mat-card-title>  
-
-  <br>
-
-  <mat-card-content>    
-      <form [formGroup]="donationForm">    
-          <table>
-
-              <tr>
-                  <td colspan="2">
-                      <span>Informatii generale:</span><br><br>    
-                  </td>
+    
+    <mat-card-title>    
+        Formular de inscriere pentru donarea de sange   
+    </mat-card-title>  
+    
+    <br>
+    
+    <mat-card-content>    
+        <form [formGroup]="donationForm">    
+            <table>
+                
+                <tr>
+                    <td colspan="2">
+                        <span>Informatii generale:</span><br><br>    
+                    </td>
                 </tr>
-              <tr>    
-                  <td>   
-                    <mat-form-field class="full-width">
-                      <input formControlName="age" matInput placeholder="Varsta">
-                    </mat-form-field>
-                  </td>
-              <!-- </tr>
-        
-              <tr>     -->
-                  <td>
-                    <mat-form-field class="full-width">
-                      <input formControlName="weight" matInput placeholder="Greutate">
-                    </mat-form-field>
-                  </td>
-              </tr>
-
-              <tr>
-                <td colspan="2">
-                    <mat-form-field class="full-width">
-                        <mat-select formControlName="gender" placeholder="Gen">
-                          <mat-option value="Feminin">Feminin</mat-option>
-                          <mat-option value="Masculin">Masculin</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                </td>
-              </tr>
-            
-              <tr>
-                <td>
-                    <mat-form-field class="full-width">
-                        <mat-select formControlName="bloodType" placeholder="Grupa de sange">
-                            <mat-option *ngFor="let type of types" [value]="type">
-                                {{type}}
-                            </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                </td>
-              <!-- </tr>
-            
-              <tr> -->
-                <td>
-                    <mat-form-field class="full-width">
-                        <mat-select formControlName="rh" placeholder="RH">
-                            <mat-option *ngFor="let rh of rhs" [value]="rh">
-                                {{rh}}
-                            </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                </td>
-              </tr>
-
-              <br>
- 
-              <tr>
-                <td colspan="2">
-                    <span>Sufar (sau am suferit in trecut) de urmatoarele boli:</span><br><br>    
-                </td>
-              </tr>
-
-              <tr>
-                <td colspan="2">
-                    <mat-checkbox (change)="toggleDisease('TBC')">TBC</mat-checkbox>
-                </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('Malarie')">Malarie</mat-checkbox>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('Hepatita')">Hepatita</mat-checkbox>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('Sifilis')">Sifilis</mat-checkbox>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('SIDA')">SIDA</mat-checkbox>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('Cardio')">Boli cardio-vasculare</mat-checkbox>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('Endo')">Boli endocrine</mat-checkbox>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('Autoimune')">Boli autoimune</mat-checkbox>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('Diabet')">Diabet zaharat</mat-checkbox>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('Schizofrenie')">Schizofrenie</mat-checkbox>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('Epilepsie')">Epilepsie</mat-checkbox>
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                      <mat-checkbox (change)="toggleDisease('Cancer')">Cancer</mat-checkbox>
-                  </td>
-              </tr>
-
-              <br>
-
-              <tr>
-                  <td colspan="2">
-                      <span>Urmez un tratament dentar</span><br><br>    
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                    <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Tratament')">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Tratament')">Nu</mat-radio-button>    
-                    </mat-radio-group> 
-                </td>
-              </tr>
-
-              <br>
-
-              <tr>
-                  <td colspan="2">
-                      <span>Consum medicamente</span><br><br>    
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                    <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Medicamente')">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Medicamente')">Nu</mat-radio-button>    
-                    </mat-radio-group> 
-                </td>
-              </tr>
-
-              <br>
-
-              <tr>
-                  <td colspan="2">
-                      <span>Am consumat alcool in ultimele 48 de ore</span><br><br>    
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                    <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Alcool')">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Alcool')">Nu</mat-radio-button>    
-                    </mat-radio-group> 
-                </td>
-              </tr>
-
-              <br>
-
-              <tr>
-                  <td colspan="2">
-                      <span>Au trecut 6 luni de la ultimul tatuaj</span><br><br>    
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                    <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da" (change)="removeRestriction('Tatuaj')">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu" (change)="addRestriction('Tatuaj')">Nu</mat-radio-button>    
-                        <mat-radio-button class="margin" value="Nu am tatuaje" (change)="removeRestriction('Tatuaj')">Nu am tatuaje</mat-radio-button>    
-                    </mat-radio-group> 
-                </td>
-              </tr>
-
-              <br>
-
-              <tr>
-                  <td colspan="2">
-                      <span>Sufar de gripa, raceala sau o boala infectioasa</span><br><br>    
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                    <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Boala')">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Boala')">Nu</mat-radio-button>    
-                    </mat-radio-group> 
-                </td>
-              </tr>
-
-              <!-- <br>
-
-              <tr>
-                  <td colspan="2">
-                      <span>Au trecut 3 luni de cand am donat ultima data</span><br><br>    
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                    <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da" (change)="removeRestriction('Donat')">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu" (change)="addRestriction('Donat')">Nu</mat-radio-button>    
-                    </mat-radio-group> 
-                </td>
-              </tr>
-               -->
-              <br>
-
-              <tr>
-                  <td colspan="2">
-                      <span>Sunt insarcinata sau am nascut recent (acum mai putin de 6 saptamani)</span><br><br>    
-                  </td>
-              </tr>
-
-              <tr>
-                  <td colspan="2">
-                    <mat-radio-group>    
-                        <mat-radio-button class="margin" value="Da" (change)="addRestriction('Bebe')">Da</mat-radio-button>  
-                        <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Bebe')">Nu</mat-radio-button>    
-                    </mat-radio-group> 
-                </td>
-              </tr>
-            </table>
-          </form>    
-        </mat-card-content>  
-        <button mat-raised-button (click)="submit()">Trimite</button>  
-</mat-card>
-
-
-<div *ngIf="formCompleted && canDonate">
-    <p>
-        Felicitari, poti dona!
-    </p>
-    <button mat-raised-button (click)="donate()">Doneaza Acum!</button>
-</div>
-
-<div *ngIf="formCompleted && !canDonate">
-    <p>
-        Ne pare rau, nu poti dona!
-    </p>
-</div>
+                <tr>    
+                    <td>   
+                        <mat-form-field class="full-width">
+                            <input formControlName="age" matInput placeholder="Varsta">
+                        </mat-form-field>
+                    </td>
+                    <!-- </tr>
+                        
+                        <tr>     -->
+                            <td>
+                                <mat-form-field class="full-width">
+                                    <input formControlName="weight" matInput placeholder="Greutate">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="2">
+                                <mat-form-field class="full-width">
+                                    <mat-select formControlName="gender" placeholder="Gen">
+                                        <mat-option value="Feminin">Feminin</mat-option>
+                                        <mat-option value="Masculin">Masculin</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <mat-form-field class="full-width">
+                                    <mat-select formControlName="bloodType" placeholder="Grupa de sange">
+                                        <mat-option *ngFor="let type of types" [value]="type">
+                                            {{type}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <!-- </tr>
+                                
+                                <tr> -->
+                                    <td>
+                                        <mat-form-field class="full-width">
+                                            <mat-select formControlName="rh" placeholder="RH">
+                                                <mat-option *ngFor="let rh of rhs" [value]="rh">
+                                                    {{rh}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                
+                                <br>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Sufar (sau am suferit in trecut) de urmatoarele boli:</span><br><br>    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('TBC')">TBC</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('Malarie')">Malarie</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('Hepatita')">Hepatita</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('Sifilis')">Sifilis</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('SIDA')">SIDA</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('Cardio')">Boli cardio-vasculare</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('Endo')">Boli endocrine</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('Autoimune')">Boli autoimune</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('Diabet')">Diabet zaharat</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('Schizofrenie')">Schizofrenie</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('Epilepsie')">Epilepsie</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-checkbox (change)="toggleDisease('Cancer')">Cancer</mat-checkbox>
+                                    </td>
+                                </tr>
+                                
+                                <br>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Urmez un tratament dentar</span><br><br>    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-radio-group>    
+                                            <mat-radio-button class="margin" value="Da" (change)="addRestriction('Tratament')">Da</mat-radio-button>  
+                                            <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Tratament')">Nu</mat-radio-button>    
+                                        </mat-radio-group> 
+                                    </td>
+                                </tr>
+                                
+                                <br>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Consum medicamente</span><br><br>    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-radio-group>    
+                                            <mat-radio-button class="margin" value="Da" (change)="addRestriction('Medicamente')">Da</mat-radio-button>  
+                                            <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Medicamente')">Nu</mat-radio-button>    
+                                        </mat-radio-group> 
+                                    </td>
+                                </tr>
+                                
+                                <br>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Am consumat alcool in ultimele 48 de ore</span><br><br>    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-radio-group>    
+                                            <mat-radio-button class="margin" value="Da" (change)="addRestriction('Alcool')">Da</mat-radio-button>  
+                                            <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Alcool')">Nu</mat-radio-button>    
+                                        </mat-radio-group> 
+                                    </td>
+                                </tr>
+                                
+                                <br>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Au trecut 6 luni de la ultimul tatuaj</span><br><br>    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-radio-group>    
+                                            <mat-radio-button class="margin" value="Da" (change)="removeRestriction('Tatuaj')">Da</mat-radio-button>  
+                                            <mat-radio-button class="margin" value="Nu" (change)="addRestriction('Tatuaj')">Nu</mat-radio-button>    
+                                            <mat-radio-button class="margin" value="Nu am tatuaje" (change)="removeRestriction('Tatuaj')">Nu am tatuaje</mat-radio-button>    
+                                        </mat-radio-group> 
+                                    </td>
+                                </tr>
+                                
+                                <br>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Sufar de gripa, raceala sau o boala infectioasa</span><br><br>    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-radio-group>    
+                                            <mat-radio-button class="margin" value="Da" (change)="addRestriction('Boala')">Da</mat-radio-button>  
+                                            <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Boala')">Nu</mat-radio-button>    
+                                        </mat-radio-group> 
+                                    </td>
+                                </tr>
+                                
+                                <!-- <br>
+                                    
+                                    <tr>
+                                        <td colspan="2">
+                                            <span>Au trecut 3 luni de cand am donat ultima data</span><br><br>    
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td colspan="2">
+                                            <mat-radio-group>    
+                                                <mat-radio-button class="margin" value="Da" (change)="removeRestriction('Donat')">Da</mat-radio-button>  
+                                                <mat-radio-button class="margin" value="Nu" (change)="addRestriction('Donat')">Nu</mat-radio-button>    
+                                            </mat-radio-group> 
+                                        </td>
+                                    </tr>
+                                -->
+                                <br>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <span>Sunt insarcinata sau am nascut recent (acum mai putin de 6 saptamani)</span><br><br>    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <mat-radio-group>    
+                                            <mat-radio-button class="margin" value="Da" (change)="addRestriction('Bebe')">Da</mat-radio-button>  
+                                            <mat-radio-button class="margin" value="Nu" (change)="removeRestriction('Bebe')">Nu</mat-radio-button>    
+                                        </mat-radio-group> 
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>    
+                    </mat-card-content>  
+                    <button mat-raised-button (click)="submit()">Trimite</button>  
+                </mat-card>
+                
+                
+                <div *ngIf="formCompleted && canDonate">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>Felicitari</mat-card-title>
+                            <mat-card-subtitle>Sa incepem!</mat-card-subtitle>
+                        </mat-card-header>
+                        <img mat-card-image src="https://img.timesnownews.com/story/1528893550-blood.PNG?d=600x450" alt="Too bad. #sosad">
+                        <mat-card-content>
+                            <p>
+                                Pentru a continua apasa pe butonul de mai jos!
+                            </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-raised-button (click)="donate()">Doneaza Acum!</button>
+                        </mat-card-actions>
+                    </mat-card>   
+                </div>
+                
+                <div *ngIf="formCompleted && !canDonate">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>Ne pare rau!</mat-card-title>
+                            <mat-card-subtitle>Mai incearca</mat-card-subtitle>
+                        </mat-card-header>
+                        <img mat-card-image src="https://vignette.wikia.nocookie.net/pbesantivirusisterrible/images/0/0c/AWW_TOO_BAD.png/revision/latest?cb=20160814003658" alt="Too bad. #sosad">
+                        <mat-card-content>
+                            <p>
+                                Din nefericire nu poti dona!
+                            </p>
+                        </mat-card-content>
+                    </mat-card>   
+                </div>

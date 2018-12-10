@@ -39,30 +39,46 @@
   </li>
 </ul>
 
-<mat-list>
+<!-- <mat-list>
   <mat-list-item *ngFor="let center of centers | async; let i = index">
     {{ center | json}}
     <button (click)="deleteCenter(i)">Sterge</button>
   </mat-list-item>
-</mat-list>
+</mat-list> -->
+<ul class="wrapper">
+  <li *ngFor="let c of centers | async; let i = index">
+    <div class="donation-center">
+      <div class="name">
+        <span>{{ c.name }}</span>
+      </div>
+      <div class="image"></div>
+      <div class="angle-x"></div>
+      <div class="angle-y"></div>
+      <div class="longitude">
+        {{ c.coordinates.longitude.toFixed(4) }}
+      </div>
+      <div class="latitude">
+        {{ c.coordinates.latitude.toFixed(4) }}
+      </div>
+      <div class="button-container">
+        <button (click)="deleteCenter(i)">Sterge</button>
+      </div>
+    </div>
+  </li>
+</ul>
+
 <div class="example-container">
 
-  <form class="example-form" [formGroup]="addCenterForm">
+  <form class="example-form" [formGroup]="addCenterForm" style="margin: 0 30px; width:unset">
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Nume Centru" formControlName="name">
     </mat-form-field>
 
-    <div class="form-group">
-      <div class="example-full-width">
-        <label for="address">Address</label>
-        <input class="form-control"
-        matGoogleMapsAutocomplete
-        [country]="ro" formControlName="address"
-        (onLocationSelected)="onLocationSelected($event)">
-      </div>
-    </div>
+    <mat-form-field class="example-full-width">
+      <input matInput class="form-control" placeholder="Type address" matGoogleMapsAutocomplete [country]="ro" formControlName="address" (onLocationSelected)="onLocationSelected($event)">
+    </mat-form-field>
 
-    <button (click)='onSubmit()' mat-raised-button>
+    <button (click)='onSubmit()' mat-raised-button class="blue-button">
       Adauga
     </button>
   </form>

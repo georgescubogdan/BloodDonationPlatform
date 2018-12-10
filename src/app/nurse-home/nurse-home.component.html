@@ -1,7 +1,7 @@
-<p>
-  Cauta donatori:
-</p>
-<form [formGroup]="newRequestForm" style="margin-left: auto; margin-right: auto; width: 100%">
+<form [formGroup]="newRequestForm" style="margin: 0 30px; width:unset">
+  <p>
+    Cauta donatori:
+  </p>
 <mat-form-field>
   <mat-select placeholder="Grupa" formControlName="bloodType">
     <mat-option *ngFor="let type of types" [value]="type">

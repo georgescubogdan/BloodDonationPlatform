@@ -1,8 +1,8 @@
-<form [formGroup]="newRequestForm">
+<form [formGroup]="newRequestForm" style="margin: 0 30px; width:unset">
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Nume Pacient" formControlName="name">
   </mat-form-field>
-  
+
   <mat-form-field>
     <mat-select placeholder="Grupa" formControlName="bloodType">
       <mat-option *ngFor="let type of types" [value]="type">
@@ -10,7 +10,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  
+
   <mat-form-field>
     <mat-select placeholder="RH" formControlName="rh">
       <mat-option *ngFor="let rh of rhs" [value]="rh">

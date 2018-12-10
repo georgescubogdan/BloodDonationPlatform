@@ -73,7 +73,6 @@ export class FormComponent implements OnInit {
     if (myData.hasOwnProperty('lastDonationDate'))
     {
       console.log(myData['lastDonationDate']);
-      // TODO: verifica distanta fata de ziua curenta
       let today = new Date();
       let ms = (today.getTime() - new Date(myData['lastDonationDate']).getTime()) / 86400000;
       if (ms < 90) {

@@ -21,9 +21,14 @@
   <img mat-card-image src="http://nursing.advanceweb.com/wp-content/uploads/sites/8/2018/10/nurse_innovators-904790024_900x.jpg" alt="Too bad. #sosad">
   <mat-card-content>
     <p>
-      Pentru a continua alege una din optinuile din bara de navigare!
+      Pentru a continua alege una din optinuile din bara de navigare sau de mai jos!
     </p>
   </mat-card-content>
+  <mat-card-actions>
+      <button mat-raised-button mat-button [routerLink]="['/nurse/home']" routerLinkActive="router-link-active">Acasa</button>
+      <button mat-raised-button mat-button [routerLink]="['/nurse/donations']" routerLinkActive="router-link-active">Donatii</button>
+      <button mat-raised-button mat-button [routerLink]="['/nurse/requests']" routerLinkActive="router-link-active">Cereri</button>
+    </mat-card-actions>
 </mat-card>
 
 <mat-card *ngIf="authorization.isApproved && authorization.isLoggedIn && authorization.isUser" class="example-card">
@@ -50,6 +55,21 @@
   <mat-card-content>
     <p>
       Pentru a continua alege una din optinuile din bara de navigare!
+    </p>
+  </mat-card-content>
+</mat-card>
+
+
+<mat-card *ngIf="authorization.isApproved && authorization.isLoggedIn && authorization.isAdmin" class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Bun venit!</mat-card-title>
+    <mat-card-subtitle>Sa incepem!</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://assetsnffrgf-a.akamaihd.net/assets/m/502012120/univ/art/502012120_univ_sqr_xl.jpg" alt="Too bad. #sosad">
+  <mat-card-content>
+    <p>
+      Adminul nu are nevoie de indicatii!
     </p>
   </mat-card-content>
 </mat-card>

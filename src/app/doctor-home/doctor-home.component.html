@@ -1,3 +1,17 @@
-<p>
-  doctor-home works!
-</p>
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>E timpul</mat-card-title>
+      <mat-card-subtitle>Sa salvam niste vieti</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://media.makeameme.org/created/you-da-man-syls1z.jpg" alt="You da Man!!">
+    <mat-card-content>
+      <p>
+        Poti crea o cerere noua acum sau poti alege sa vezi cererile deja existente!
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button mat-button [routerLink]="['/doctor/request']" routerLinkActive="router-link-active">Cerere noua!</button>
+      <button mat-raised-button mat-button [routerLink]="['/doctor/requests']" routerLinkActive="router-link-active">Vezi cererile existente!</button>
+    </mat-card-actions>
+  </mat-card>

@@ -1,3 +1,17 @@
-<p>
-  user-home works!
-</p>
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Timpul sa alegi!</mat-card-title>
+    <mat-card-subtitle>Este momentul tau!</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://3.bp.blogspot.com/-mjqPiR7Tip8/We8Mm9_-1FI/AAAAAAAAAPM/FDpNdsm7Egc2pjZzSb6vgvLqeM3ymSjGgCLcBGAs/s1600/morpheus-red-pill-blue-pill.jpg" alt="Choose Now!">
+  <mat-card-content>
+    <p>
+      Poti dona acum sau poti alege sa vezi donatiile anterioare. Depinde de tine!
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button mat-button [routerLink]="['/user/donate']" routerLinkActive="router-link-active">Doneaza acum!</button>
+    <button mat-raised-button mat-button [routerLink]="['/user/results']" routerLinkActive="router-link-active">Vezi donatiile anterioare!</button>
+  </mat-card-actions>
+</mat-card>

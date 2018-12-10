@@ -88,10 +88,19 @@ export class NurseDonationsComponent implements OnInit {
 
     console.log(items);
 
-    this.db.object('donations/' + userKey + '/' + donationKey).snapshotChanges().subscribe(docSnapshot => {
+    this.db.object('donations/' + userKey + '/' + donationKey).snapshotChanges().pipe(take(1)).subscribe(docSnapshot => {
       if (docSnapshot.key) {
         this.db.list('donations/' + userKey + '/').update(donationKey, {
-          pending: false
+          pending: false,
+          GLC: Math.floor(Math.random() * 100) + 1,
+          VEM: Math.floor(Math.random() * 100) + 1,
+          HEM: Math.floor(Math.random() * 100) + 1,
+          CHEM:Math.floor(Math.random() * 100) + 1,
+          TGP: Math.floor(Math.random() * 50) + 1,
+          TGO: Math.floor(Math.random() * 50) + 1,
+          GGT: Math.floor(Math.random() * 200) + 1,
+          HDL: Math.floor(Math.random() * 100) + 1,
+          LDL: Math.floor(Math.random() * 100) + 1,
           //TODO mock de analize de pus in db
         });
       }});
